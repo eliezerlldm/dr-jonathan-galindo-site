@@ -22,7 +22,8 @@
 <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body { overflow-x: hidden; }
   body { margin: 0; background: #FFFFFF; color: #16294F; font-family: 'Source Sans 3', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
   a { color: #1B449C; text-decoration: none; }
   a:hover { color: #3563C4; }
@@ -36,6 +37,20 @@
   @keyframes scrollDot { 0% { transform: translateY(0); opacity: 0; } 30% { opacity: 1; } 70% { transform: translateY(13px); opacity: 0; } 100% { opacity: 0; } }
   @keyframes spinSlow { to { transform: rotate(360deg); } }
   @keyframes risein { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+
+  .grid-2 > *, .grid-3 > *, .grid-4 > *, .grid-3-wide > * { min-width: 0; }
+  .nav-hamburger { display: none; }
+  @media (max-width: 860px) {
+    .nav-links { display: none !important; }
+    .nav-hamburger { display: inline-flex !important; }
+  }
+  @media (max-width: 900px) { .grid-3-wide { grid-template-columns: 1fr !important; } }
+  @media (max-width: 768px) {
+    .grid-2 { grid-template-columns: 1fr !important; }
+    .grid-3 { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 600px) { .grid-4 { grid-template-columns: repeat(2,1fr) !important; } }
+  @media (max-width: 420px) { .grid-4 { grid-template-columns: 1fr !important; } }
 </style>
 <script src="./image-slot.js"></script>
 </helmet>
@@ -48,7 +63,7 @@
       <img src="https://drjonathangalindo.com/wp-content/uploads/2020/03/logo-dr-jonathan.svg" alt="Dr. Jonathan Galindo" style="height:48px;display:block">
     </a>
     <div style="display:flex;align-items:center;gap:22px;min-width:0">
-      <div style="display:flex;gap:17px;font-size:14.5px;font-weight:600;min-width:0">
+      <div class="nav-links" style="display:flex;gap:17px;font-size:14.5px;font-weight:600;min-width:0">
         <a href="#doctor" style="color:#33456B;white-space:nowrap">Doctor</a>
         <a href="#formacion" style="color:#33456B;white-space:nowrap">Formación</a>
         <a href="#servicios" style="color:#33456B;white-space:nowrap">Servicios</a>
@@ -56,8 +71,20 @@
         <a href="#testimonios" style="color:#33456B;white-space:nowrap">Testimonios</a>
         <a href="#ubicaciones" style="color:#33456B;white-space:nowrap">Ubicaciones</a>
       </div>
-      <a href="#citas" style="display:inline-flex;align-items:center;gap:8px;flex:none;background:#1B449C;color:#fff;padding:11px 20px;border-radius:11px;font-weight:700;font-size:14.5px;white-space:nowrap;box-shadow:0 8px 22px rgba(27,68,156,.25)">Agendar cita</a>
+      <a href="#citas" class="nav-links" style="display:inline-flex;align-items:center;gap:8px;flex:none;background:#1B449C;color:#fff;padding:11px 20px;border-radius:11px;font-weight:700;font-size:14.5px;white-space:nowrap;box-shadow:0 8px 22px rgba(27,68,156,.25)">Agendar cita</a>
+      <button class="nav-hamburger" onClick="{{ toggleMobileMenu }}" aria-label="Abrir menú" style="align-items:center;justify-content:center;width:42px;height:42px;flex:none;border:1px solid #D8E0EE;border-radius:10px;background:#fff;font-size:20px;color:#1B449C;cursor:pointer">{{ mobileMenuIcon }}</button>
     </div>
+    <sc-if value="{{ mobileMenuOpen }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ closeMobileMenu }}" style="position:absolute;top:100%;left:0;right:0;display:flex;flex-direction:column;padding:14px 20px 20px;gap:4px;background:#fff;border-top:1px solid #E3E9F2;box-shadow:0 24px 40px rgba(22,41,79,.18)">
+        <a href="#doctor" style="padding:12px 6px;color:#33456B;font-weight:600;border-bottom:1px solid #F0F3F8">Doctor</a>
+        <a href="#formacion" style="padding:12px 6px;color:#33456B;font-weight:600;border-bottom:1px solid #F0F3F8">Formación</a>
+        <a href="#servicios" style="padding:12px 6px;color:#33456B;font-weight:600;border-bottom:1px solid #F0F3F8">Servicios</a>
+        <a href="#plantillas" style="padding:12px 6px;color:#33456B;font-weight:600;border-bottom:1px solid #F0F3F8">Plantillas</a>
+        <a href="#testimonios" style="padding:12px 6px;color:#33456B;font-weight:600;border-bottom:1px solid #F0F3F8">Testimonios</a>
+        <a href="#ubicaciones" style="padding:12px 6px;color:#33456B;font-weight:600;border-bottom:1px solid #F0F3F8">Ubicaciones</a>
+        <a href="#citas" style="margin-top:10px;text-align:center;background:#1B449C;color:#fff;padding:13px 20px;border-radius:11px;font-weight:700">Agendar cita</a>
+      </div>
+    </sc-if>
   </nav>
 
   <!-- ===================== HERO ===================== -->
@@ -66,9 +93,9 @@
     <div style="position:absolute;bottom:-160px;left:-120px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle at 50% 50%, rgba(27,68,156,.28), rgba(27,68,156,0) 70%);filter:blur(30px);animation:blobDrift2 20s ease-in-out infinite;pointer-events:none"></div>
     <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(27,68,156,.10) 1.1px, transparent 1.1px);background-size:26px 26px;mask-image:radial-gradient(circle at 70% 40%, #000, transparent 72%);-webkit-mask-image:radial-gradient(circle at 70% 40%, #000, transparent 72%);opacity:.5;pointer-events:none"></div>
 
-    <div style="position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;width:100%;max-width:1320px;margin:0 auto">
+    <div class="grid-2" style="position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;width:100%;max-width:1320px;margin:0 auto">
       <div>
-        <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .8s cubic-bezier(.2,.7,.2,1);display:inline-flex;align-items:center;gap:9px;padding:8px 15px;border:1px solid rgba(82,174,50,.4);border-radius:100px;background:rgba(82,174,50,.08);font-size:13px;font-weight:700;color:#3D8A24;letter-spacing:.4px;text-transform:uppercase">
+        <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .8s cubic-bezier(.2,.7,.2,1);display:inline-flex;flex-wrap:wrap;align-items:center;gap:9px;padding:8px 15px;border:1px solid rgba(82,174,50,.4);border-radius:100px;background:rgba(82,174,50,.08);font-size:13px;font-weight:700;color:#3D8A24;letter-spacing:.4px;text-transform:uppercase;max-width:100%">
           <span style="width:7px;height:7px;border-radius:50%;background:#52AE32"></span>
           Guadalajara · Atención por cita y urgencias 24h
         </div>
@@ -113,7 +140,7 @@
           <div style="position:absolute;inset:-22px -26px -26px -18px;background:linear-gradient(150deg,rgba(27,68,156,.14),rgba(82,174,50,.16));border-radius:34px;z-index:0"></div>
           <div style="position:absolute;top:-46px;left:-46px;width:120px;height:120px;border:2px dashed rgba(27,68,156,.35);border-radius:50%;animation:spinSlow 24s linear infinite;z-index:0"></div>
           <div style="position:relative;z-index:2;border-radius:26px;overflow:hidden;border:1px solid #E3E9F2;box-shadow:0 30px 70px rgba(22,41,79,.22);aspect-ratio:4/5;height:min(72vh,600px);width:auto;max-width:100%;background:#F2F6FC">
-            <image-slot id="hero-doc" shape="rect" fit="cover" src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=900&q=80&auto=format&fit=crop" credit="Foto de Unsplash" credit-href="https://unsplash.com" placeholder="Arrastra aquí la foto del Dr. Galindo"></image-slot>
+            <image-slot id="hero-doc" shape="rect" fit="cover" src="imgs/doc.jpg" placeholder="Arrastra aquí la foto del Dr. Galindo"></image-slot>
             <div style="position:absolute;top:16px;left:16px;display:inline-flex;align-items:center;gap:6px;padding:7px 13px;background:rgba(255,255,255,.92);border-radius:100px;font-size:12.5px;font-weight:700;color:#1B449C;box-shadow:0 6px 16px rgba(9,24,56,.18)"><span style="color:#52AE32;font-size:14px">✔</span> Médico certificado</div>
             <div style="position:absolute;left:0;right:0;bottom:0;padding:22px;background:linear-gradient(to top,rgba(11,26,56,.88),transparent);pointer-events:none">
               <div style="font-family:'PT Sans';font-weight:700;font-size:20px;color:#fff">Dr. Jonathan Galindo Contreras</div>
@@ -139,9 +166,9 @@
 
   <!-- ===================== DOCTOR ===================== -->
   <section id="doctor" data-screen-label="Doctor" style="padding:clamp(70px,9vw,130px) clamp(20px,5vw,64px);background:#FFFFFF">
-    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(40px,6vw,80px);align-items:center">
+    <div class="grid-2" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(40px,6vw,80px);align-items:center">
       <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .8s cubic-bezier(.2,.7,.2,1);position:relative;border-radius:24px;overflow:hidden;border:1px solid #E3E9F2;box-shadow:0 20px 50px rgba(22,41,79,.10);aspect-ratio:1/1;background:#F2F6FC">
-        <image-slot id="doctor-photo" shape="rect" fit="cover" placeholder="Foto del doctor / consultorio"></image-slot>
+        <image-slot id="doctor-photo" shape="rect" fit="cover" src="imgs/hueso.avif" placeholder="Foto del doctor / consultorio"></image-slot>
       </div>
       <div>
         <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s cubic-bezier(.2,.7,.2,1);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#52AE32">Conoce al especialista</div>
@@ -198,7 +225,7 @@
 
   <!-- ===================== STATS ===================== -->
   <section data-screen-label="Stats" style="padding:clamp(50px,6vw,80px) clamp(20px,5vw,64px);background:#F2F6FC">
-    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px">
+    <div class="grid-4" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px">
       <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease;text-align:center;padding:30px 16px;background:#fff;border:1px solid #E3E9F2;border-radius:18px;box-shadow:0 8px 24px rgba(22,41,79,.06)">
         <div data-count="12" data-suffix="+" style="font-family:'PT Sans';font-weight:700;font-size:clamp(38px,4.5vw,58px);line-height:1;color:#1B449C">0</div>
         <div style="font-size:14px;color:#5B6B85;margin-top:8px">Años de práctica</div>
@@ -250,7 +277,7 @@
 
   <!-- ===================== PLANTILLAS ===================== -->
   <section id="plantillas" data-screen-label="Plantillas" style="padding:clamp(70px,9vw,130px) clamp(20px,5vw,64px);background:linear-gradient(180deg,#FFFFFF,#F3F9F0)">
-    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,72px);align-items:center">
+    <div class="grid-2" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,72px);align-items:center">
       <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .9s cubic-bezier(.2,.7,.2,1);position:relative;border-radius:24px;overflow:hidden;border:1px solid #E3E9F2;box-shadow:0 20px 50px rgba(22,41,79,.10);aspect-ratio:4/3;background:#fff;order:2">
         <image-slot id="plantillas-photo" shape="rect" fit="cover" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=80&auto=format&fit=crop" credit="Foto de Unsplash" credit-href="https://unsplash.com" placeholder="Foto de las plantillas personalizadas"></image-slot>
       </div>
@@ -258,7 +285,7 @@
         <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#52AE32">A tu medida</div>
         <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .06s;font-family:'PT Sans';font-weight:700;font-size:clamp(30px,3.6vw,46px);letter-spacing:-.8px;margin:14px 0 0;color:#1B449C">Plantillas personalizadas</h2>
         <p data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .12s;font-size:17px;color:#4A5B7C;line-height:1.65;margin:18px 0 0">Para deportistas, mejora de postura, personas con alto peso o de la tercera edad. Hechas a la medida de tus necesidades.</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:28px 0">
+        <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:28px 0">
           <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .16s;display:flex;gap:11px;align-items:center;font-size:15px;color:#33456B"><span style="color:#52AE32;font-weight:700">✓</span> Hechas a tu medida</div>
           <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .2s;display:flex;gap:11px;align-items:center;font-size:15px;color:#33456B"><span style="color:#52AE32;font-weight:700">✓</span> Alta calidad y reconocimiento</div>
           <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .24s;display:flex;gap:11px;align-items:center;font-size:15px;color:#33456B"><span style="color:#52AE32;font-weight:700">✓</span> Fácilmente lavables</div>
@@ -454,7 +481,7 @@
           <div><div style="color:#F5B400;font-size:15px;letter-spacing:2px">★★★★★</div><div style="font-size:12.5px;color:#5B6B85">26 reseñas · Google</div></div>
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+      <div class="grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
         <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
           <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .7s cubic-bezier(.2,.7,.2,1);background:#fff;border:1px solid #E3E9F2;border-radius:18px;padding:26px 24px;display:flex;flex-direction:column;gap:14px;box-shadow:0 6px 18px rgba(22,41,79,.05)">
             <div style="color:#F5B400;font-size:15px;letter-spacing:2px">★★★★★</div>
@@ -475,7 +502,7 @@
       <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#52AE32">Reduce costos</div>
       <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .06s;font-family:'PT Sans';font-weight:700;font-size:clamp(26px,3vw,38px);letter-spacing:-.5px;margin:12px 0 8px;color:#1B449C">Trabajamos con tu aseguradora</h2>
       <p data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .12s;font-size:16px;color:#5B6B85;max-width:520px;margin:0 auto 36px">Si no ves la tuya en el listado, no te preocupes: hacemos convenio con todas las aseguradoras.</p>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+      <div class="grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
         <sc-for list="{{ insurers }}" as="ins" hint-placeholder-count="8">
           <div data-reveal style="opacity:0;transform:translateY(16px);transition:all .6s ease;height:72px;display:flex;align-items:center;justify-content:center;gap:11px;background:#fff;border:1px solid #E3E9F2;border-radius:12px;padding:8px 12px;box-shadow:0 4px 14px rgba(22,41,79,.05)"><span style="{{ ins.badge }}">{{ ins.ic }}</span><span style="{{ ins.wm }}">{{ ins.label }}</span></div>
         </sc-for>
@@ -490,7 +517,7 @@
         <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#52AE32">Dónde encontrarnos</div>
         <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .06s;font-family:'PT Sans';font-weight:700;font-size:clamp(30px,3.6vw,46px);letter-spacing:-.8px;margin:14px 0 0;color:#1B449C">Consultorios en Guadalajara</h2>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
         <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .8s ease;background:#fff;border:1px solid #E3E9F2;border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(22,41,79,.07)">
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3732.4637376807877!2d-103.3705937!3d20.691385199999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428af5bf64f4bdd%3A0xb254acc91c249c41!2sDr.%20Jonathan%20Galindo%20-%20Traumat%C3%B3logo%20y%20Ortopedista!5e0!3m2!1ses-419!2smx!4v1677953522106!5m2!1ses-419!2smx" style="width:100%;height:230px;border:0" loading="lazy"></iframe>
           <div style="padding:24px">
@@ -523,7 +550,7 @@
 
   <!-- ===================== FOOTER ===================== -->
   <footer style="padding:clamp(50px,6vw,72px) clamp(20px,5vw,64px) 40px;background:#F2F6FC;border-top:1px solid #E3E9F2">
-    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;align-items:start">
+    <div class="grid-3-wide" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;align-items:start">
       <div>
         <img src="https://drjonathangalindo.com/wp-content/uploads/2020/03/logo-dr-jonathan.svg" alt="Dr. Jonathan Galindo" style="height:58px;display:block">
         <p style="font-size:14px;color:#5B6B85;line-height:1.6;margin:18px 0 0;max-width:340px">Médico ortopedista y traumatólogo, especialista en cirugía del deporte y artroscopía en Guadalajara.</p>
@@ -569,7 +596,7 @@
             </sc-for>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:30px">
+          <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:30px">
             <div style="padding:18px 20px;background:#F6F9FD;border:1px solid #E3E9F2;border-radius:14px">
               <div style="font-size:12.5px;text-transform:uppercase;letter-spacing:.8px;color:#5B6B85;font-weight:700;margin-bottom:6px">Recuperación</div>
               <div style="font-family:'PT Sans';font-weight:700;font-size:18px;color:#1B449C">{{ modal.recovery }}</div>
@@ -627,6 +654,7 @@
 class Component extends DCLogic {
   state = {
     navSolid: false,
+    mobileMenuOpen: false,
     step: 1,
     loc: null,
     motivo: null,
@@ -868,6 +896,8 @@ class Component extends DCLogic {
   };
 
   toggleChat = () => this.setState({ chatOpen: !this.state.chatOpen });
+  toggleMobileMenu = () => this.setState({ mobileMenuOpen: !this.state.mobileMenuOpen });
+  closeMobileMenu = () => this.setState({ mobileMenuOpen: false });
   sendQuick(q) {
     const replies = {
       'Agendar una cita': 'Perfecto 📅 Puedes agendar en la sección "Agenda tu consulta" aquí arriba, o te confirmo por WhatsApp al (33) 2274 0493.',
@@ -891,6 +921,10 @@ class Component extends DCLogic {
 
     return {
       navRef: (el) => { this._nav = el; },
+      mobileMenuOpen: s.mobileMenuOpen,
+      mobileMenuIcon: s.mobileMenuOpen ? '✕' : '☰',
+      toggleMobileMenu: this.toggleMobileMenu,
+      closeMobileMenu: this.closeMobileMenu,
       chatScroll: (el) => { this._chatScroll = el; },
 
       heroWord: this.HERO_WORDS[s.heroWordIdx],
