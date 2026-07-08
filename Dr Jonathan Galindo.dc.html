@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #080D18; color: #EEF2F8; font-family: 'Manrope', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #7FB0FF; text-decoration: none; }
+  a:hover { color: #A9CCFF; }
+  ::selection { background: rgba(47,123,247,.35); }
+  @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+  @keyframes pulseRing { 0% { box-shadow: 0 0 0 0 rgba(47,123,247,.5); } 70% { box-shadow: 0 0 0 16px rgba(47,123,247,0); } 100% { box-shadow: 0 0 0 0 rgba(47,123,247,0); } }
+  @keyframes gridmove { 0% { background-position: 0 0; } 100% { background-position: 44px 44px; } }
+  @keyframes chatIn { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
+  ::-webkit-scrollbar { width: 11px; }
+  ::-webkit-scrollbar-track { background: #080D18; }
+  ::-webkit-scrollbar-thumb { background: #23304a; border-radius: 8px; border: 2px solid #080D18; }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div style="max-width:100%;overflow-x:hidden;position:relative">
+
+  <!-- ===================== NAV ===================== -->
+  <nav ref="{{ navRef }}" style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,64px);transition:background .35s ease, backdrop-filter .35s ease, border-color .35s ease, padding .35s ease;border-bottom:1px solid transparent">
+    <a href="#top" style="display:flex;align-items:center;gap:13px;color:inherit">
+      <div style="width:44px;height:44px;border-radius:13px;background:linear-gradient(135deg,#2F7BF7,#1E56C8);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700;font-size:18px;letter-spacing:-.5px;color:#fff;box-shadow:0 6px 20px rgba(47,123,247,.35)">JG</div>
+      <div style="line-height:1.1">
+        <div style="font-family:'Space Grotesk';font-weight:600;font-size:17px;letter-spacing:-.3px">Dr. Jonathan Galindo</div>
+        <div style="font-size:11.5px;color:#93A0B8;letter-spacing:.5px;text-transform:uppercase">Ortopedia · Medicina Deportiva</div>
+      </div>
+    </a>
+    <div style="display:flex;align-items:center;gap:34px">
+      <div style="display:flex;gap:28px;font-size:15px;font-weight:500" data-nav-links>
+        <a href="#doctor" style="color:#C4CEDE">Doctor</a>
+        <a href="#servicios" style="color:#C4CEDE">Servicios</a>
+        <a href="#plantillas" style="color:#C4CEDE">Plantillas</a>
+        <a href="#testimonios" style="color:#C4CEDE">Testimonios</a>
+        <a href="#ubicaciones" style="color:#C4CEDE">Ubicaciones</a>
+      </div>
+      <a href="#citas" style="display:inline-flex;align-items:center;gap:8px;background:#2F7BF7;color:#fff;padding:11px 20px;border-radius:11px;font-weight:600;font-size:14.5px;box-shadow:0 8px 24px rgba(47,123,247,.32)">Agendar cita</a>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <header id="top" data-screen-label="Hero" style="position:relative;min-height:100vh;display:flex;align-items:center;padding:108px clamp(20px,5vw,64px) 64px;overflow:hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(120% 90% at 78% 12%, rgba(47,123,247,.20), transparent 55%), radial-gradient(90% 70% at 8% 90%, rgba(47,217,196,.10), transparent 55%), #080D18"></div>
+    <div style="position:absolute;inset:0;opacity:.5;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:44px 44px;animation:gridmove 18s linear infinite;mask-image:radial-gradient(circle at 60% 40%,#000,transparent 75%)"></div>
+
+    <div style="position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;width:100%;max-width:1320px;margin:0 auto">
+      <div>
+        <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .8s cubic-bezier(.2,.7,.2,1);display:inline-flex;align-items:center;gap:9px;padding:8px 15px;border:1px solid rgba(47,123,247,.35);border-radius:100px;background:rgba(47,123,247,.08);font-size:13px;font-weight:600;color:#9FC2FF;letter-spacing:.4px;text-transform:uppercase">
+          <span style="width:7px;height:7px;border-radius:50%;background:#2FD9C4;box-shadow:0 0 10px #2FD9C4"></span>
+          Guadalajara · Atención por cita y urgencias 24h
+        </div>
+        <h1 data-reveal style="opacity:0;transform:translateY(24px);transition:all .8s cubic-bezier(.2,.7,.2,1) .08s;font-family:'Space Grotesk';font-weight:700;font-size:clamp(44px,5.6vw,84px);line-height:.98;letter-spacing:-2px;margin:26px 0 0">
+          Devolviendo<br>la <span style="background:linear-gradient(120deg,#2F7BF7,#2FD9C4);-webkit-background-clip:text;background-clip:text;color:transparent">vitalidad</span>
+        </h1>
+        <p data-reveal style="opacity:0;transform:translateY(24px);transition:all .8s cubic-bezier(.2,.7,.2,1) .16s;font-size:clamp(17px,1.5vw,20px);line-height:1.6;color:#AEB9CC;max-width:520px;margin:24px 0 0">
+          Ortopedia, medicina deportiva y salud de alto rendimiento. Cirugía del deporte y artroscopía para que vuelvas a moverte sin dolor.
+        </p>
+        <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .8s cubic-bezier(.2,.7,.2,1) .24s;display:flex;flex-wrap:wrap;gap:14px;margin-top:36px">
+          <a href="#citas" style="display:inline-flex;align-items:center;gap:9px;background:#2F7BF7;color:#fff;padding:16px 28px;border-radius:13px;font-weight:700;font-size:16px;box-shadow:0 12px 34px rgba(47,123,247,.4)">Agendar consulta →</a>
+          <a href="#servicios" style="display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);color:#EEF2F8;padding:16px 28px;border-radius:13px;font-weight:600;font-size:16px">Ver servicios</a>
+        </div>
+        <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .8s cubic-bezier(.2,.7,.2,1) .32s;display:flex;gap:34px;margin-top:44px">
+          <div><div style="font-family:'Space Grotesk';font-weight:700;font-size:30px;color:#fff">12+</div><div style="font-size:13px;color:#93A0B8">Años de práctica</div></div>
+          <div style="width:1px;background:rgba(255,255,255,.1)"></div>
+          <div><div style="font-family:'Space Grotesk';font-weight:700;font-size:30px;color:#fff">4.5★</div><div style="font-size:13px;color:#93A0B8">Google · 26 reseñas</div></div>
+          <div style="width:1px;background:rgba(255,255,255,.1)"></div>
+          <div><div style="font-family:'Space Grotesk';font-weight:700;font-size:30px;color:#fff">24h</div><div style="font-size:13px;color:#93A0B8">Urgencias</div></div>
+        </div>
+      </div>
+
+      <div data-reveal style="opacity:0;transform:translateY(24px);transition:all 1s cubic-bezier(.2,.7,.2,1) .2s;position:relative">
+        <div style="position:absolute;-inset:20px;top:-24px;left:-24px;right:-24px;bottom:-24px;background:radial-gradient(circle at 50% 40%,rgba(47,123,247,.25),transparent 70%);filter:blur(20px)"></div>
+        <div style="position:relative;border-radius:26px;overflow:hidden;border:1px solid rgba(255,255,255,.12);box-shadow:0 40px 90px rgba(0,0,0,.55);aspect-ratio:4/5;height:min(72vh,600px);width:auto;justify-self:end;max-width:100%;background:#0F1626">
+          <image-slot id="hero-portrait" shape="rect" fit="cover" placeholder="Arrastra aquí la foto del Dr. Galindo (vertical)"></image-slot>
+          <div style="position:absolute;left:0;right:0;bottom:0;padding:22px;background:linear-gradient(to top,rgba(8,13,24,.92),transparent);pointer-events:none">
+            <div style="font-family:'Space Grotesk';font-weight:600;font-size:20px">Dr. Jonathan Galindo Contreras</div>
+            <div style="font-size:14px;color:#AEB9CC">Traumatólogo · Cirugía del deporte y artroscopía</div>
+          </div>
+        </div>
+        <div style="position:absolute;top:-18px;-right:18px;right:-18px;background:#0F1626;border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px 16px;box-shadow:0 16px 40px rgba(0,0,0,.5);animation:floaty 6s ease-in-out infinite">
+          <div style="font-size:12px;color:#93A0B8">Tasa de retorno deportivo</div>
+          <div style="font-family:'Space Grotesk';font-weight:700;font-size:26px;color:#2FD9C4">97%</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== DOCTOR ===================== -->
+  <section id="doctor" data-screen-label="Doctor" style="padding:clamp(70px,9vw,130px) clamp(20px,5vw,64px);background:#0A1020">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(40px,6vw,80px);align-items:center">
+      <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .8s cubic-bezier(.2,.7,.2,1);position:relative;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.1);aspect-ratio:1/1;background:#0F1626">
+        <image-slot id="doctor-photo" shape="rect" fit="cover" placeholder="Arrastra una foto del doctor / consultorio"></image-slot>
+      </div>
+      <div>
+        <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s cubic-bezier(.2,.7,.2,1);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#2F7BF7">Conoce al especialista</div>
+        <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s cubic-bezier(.2,.7,.2,1) .06s;font-family:'Space Grotesk';font-weight:700;font-size:clamp(30px,3.6vw,46px);letter-spacing:-1px;line-height:1.05;margin:14px 0 0">Dr. Jonathan Galindo Contreras</h2>
+        <p data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s cubic-bezier(.2,.7,.2,1) .12s;font-size:17px;line-height:1.7;color:#AEB9CC;margin:20px 0 0">
+          Ortopedista y traumatólogo en Guadalajara con <strong style="color:#EEF2F8">sub-especialidad en cirugía deportiva y artroscopía</strong>. Me enfoco en el tratamiento de afecciones en huesos, articulaciones y músculos, particularmente en personas físicamente activas y atletas.
+        </p>
+        <div style="display:grid;gap:14px;margin-top:32px">
+          <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s cubic-bezier(.2,.7,.2,1) .18s;display:flex;gap:16px;align-items:center;padding:16px 18px;background:#0F1626;border:1px solid rgba(255,255,255,.09);border-radius:14px">
+            <div style="width:44px;height:44px;flex:none;border-radius:11px;background:rgba(47,123,247,.14);color:#7FB0FF;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700">17</div>
+            <div><div style="font-weight:700;font-size:15.5px">Cirugía del Deporte y Artroscopía</div><div style="font-size:13.5px;color:#93A0B8">Universidad Anáhuac · 2017</div></div>
+          </div>
+          <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s cubic-bezier(.2,.7,.2,1) .24s;display:flex;gap:16px;align-items:center;padding:16px 18px;background:#0F1626;border:1px solid rgba(255,255,255,.09);border-radius:14px">
+            <div style="width:44px;height:44px;flex:none;border-radius:11px;background:rgba(47,123,247,.14);color:#7FB0FF;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700">16</div>
+            <div><div style="font-weight:700;font-size:15.5px">Ortopedia y Traumatología</div><div style="font-size:13.5px;color:#93A0B8">UNAM · 2016</div></div>
+          </div>
+          <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s cubic-bezier(.2,.7,.2,1) .3s;display:flex;gap:16px;align-items:center;padding:16px 18px;background:#0F1626;border:1px solid rgba(255,255,255,.09);border-radius:14px">
+            <div style="width:44px;height:44px;flex:none;border-radius:11px;background:rgba(47,123,247,.14);color:#7FB0FF;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700">10</div>
+            <div><div style="font-weight:700;font-size:15.5px">Médico Cirujano y Partero</div><div style="font-size:13.5px;color:#93A0B8">Universidad de Guadalajara · 2010</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STATS ===================== -->
+  <section data-screen-label="Stats" style="padding:clamp(50px,6vw,80px) clamp(20px,5vw,64px);background:linear-gradient(180deg,#080D18,#0A1020)">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px">
+      <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease;text-align:center;padding:30px 16px;background:#0F1626;border:1px solid rgba(255,255,255,.08);border-radius:18px">
+        <div data-count="12" data-suffix="+" style="font-family:'Space Grotesk';font-weight:700;font-size:clamp(38px,4.5vw,58px);line-height:1;color:#fff">0</div>
+        <div style="font-size:14px;color:#93A0B8;margin-top:8px">Años de práctica</div>
+      </div>
+      <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .08s;text-align:center;padding:30px 16px;background:#0F1626;border:1px solid rgba(255,255,255,.08);border-radius:18px">
+        <div data-count="1000" data-suffix="+" style="font-family:'Space Grotesk';font-weight:700;font-size:clamp(38px,4.5vw,58px);line-height:1;color:#fff">0</div>
+        <div style="font-size:14px;color:#93A0B8;margin-top:8px">Atletas atendidos</div>
+      </div>
+      <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .16s;text-align:center;padding:30px 16px;background:#0F1626;border:1px solid rgba(255,255,255,.08);border-radius:18px">
+        <div data-count="97" data-suffix="%" style="font-family:'Space Grotesk';font-weight:700;font-size:clamp(38px,4.5vw,58px);line-height:1;color:#2FD9C4">0</div>
+        <div style="font-size:14px;color:#93A0B8;margin-top:8px">Retorno deportivo</div>
+      </div>
+      <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .24s;text-align:center;padding:30px 16px;background:#0F1626;border:1px solid rgba(255,255,255,.08);border-radius:18px">
+        <div data-count="40" data-suffix="%" style="font-family:'Space Grotesk';font-weight:700;font-size:clamp(38px,4.5vw,58px);line-height:1;color:#2FD9C4">0</div>
+        <div style="font-size:14px;color:#93A0B8;margin-top:8px">Recuperación más rápida</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVICIOS ===================== -->
+  <section id="servicios" data-screen-label="Servicios" style="padding:clamp(70px,9vw,130px) clamp(20px,5vw,64px);background:#0A1020">
+    <div style="max-width:1200px;margin:0 auto">
+      <div style="max-width:640px">
+        <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#2F7BF7">Lo que hacemos</div>
+        <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .06s;font-family:'Space Grotesk';font-weight:700;font-size:clamp(30px,3.8vw,50px);letter-spacing:-1px;margin:14px 0 0">Servicios especializados</h2>
+        <p data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .12s;font-size:17px;color:#AEB9CC;margin:16px 0 0;line-height:1.6">Tratamiento quirúrgico y no quirúrgico de precisión, adaptado a tu articulación y tu estilo de vida.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px">
+        <sc-for list="{{ services }}" as="svc" hint-placeholder-count="9">
+          <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .7s cubic-bezier(.2,.7,.2,1);background:#0F1626;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:26px 24px" style-hover="border-color:rgba(47,123,247,.5);transform:translateY(-4px);background:#111a2e">
+            <div style="font-family:'Space Grotesk';font-weight:700;font-size:14px;color:#2F7BF7;letter-spacing:1px">{{ svc.num }}</div>
+            <h3 style="font-family:'Space Grotesk';font-weight:600;font-size:20px;margin:14px 0 10px;letter-spacing:-.3px">{{ svc.title }}</h3>
+            <p style="font-size:14.5px;color:#93A0B8;line-height:1.55;margin:0">{{ svc.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PLANTILLAS ===================== -->
+  <section id="plantillas" data-screen-label="Plantillas" style="padding:clamp(70px,9vw,130px) clamp(20px,5vw,64px);background:linear-gradient(180deg,#0A1020,#080D18)">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,72px);align-items:center">
+      <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .9s cubic-bezier(.2,.7,.2,1);position:relative;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.1);aspect-ratio:4/3;background:#0F1626;order:2">
+        <image-slot id="plantillas-photo" shape="rect" fit="cover" placeholder="Foto de las plantillas personalizadas"></image-slot>
+      </div>
+      <div style="order:1">
+        <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#2FD9C4">A tu medida</div>
+        <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .06s;font-family:'Space Grotesk';font-weight:700;font-size:clamp(30px,3.6vw,46px);letter-spacing:-1px;margin:14px 0 0">Plantillas personalizadas</h2>
+        <p data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .12s;font-size:17px;color:#AEB9CC;line-height:1.65;margin:18px 0 0">Para deportistas, mejora de postura, personas con alto peso o de la tercera edad. Hechas a la medida de tus necesidades.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:28px 0">
+          <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .16s;display:flex;gap:11px;align-items:center;font-size:15px;color:#DCE3EF"><span style="color:#2FD9C4;font-weight:700">✓</span> Hechas a tu medida</div>
+          <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .2s;display:flex;gap:11px;align-items:center;font-size:15px;color:#DCE3EF"><span style="color:#2FD9C4;font-weight:700">✓</span> Alta calidad y reconocimiento</div>
+          <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .24s;display:flex;gap:11px;align-items:center;font-size:15px;color:#DCE3EF"><span style="color:#2FD9C4;font-weight:700">✓</span> Fácilmente lavables</div>
+          <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .28s;display:flex;gap:11px;align-items:center;font-size:15px;color:#DCE3EF"><span style="color:#2FD9C4;font-weight:700">✓</span> Diseño funcional y ergonómico</div>
+        </div>
+        <a href="https://api.whatsapp.com/send?phone=5213322740493&text=Hola,%20Dr.%20Galindo,%20me%20interesan%20las%20plantillas%20personalizadas." target="_blank" style="display:inline-flex;align-items:center;gap:9px;background:#2FD9C4;color:#062018;padding:15px 26px;border-radius:13px;font-weight:700;font-size:15.5px">Solicitar plantillas</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== RESERVA DE CITAS (INTERACTIVO) ===================== -->
+  <section id="citas" data-screen-label="Reserva de citas" style="padding:clamp(70px,9vw,130px) clamp(20px,5vw,64px);background:#080D18;position:relative">
+    <div style="position:absolute;inset:0;background:radial-gradient(80% 60% at 50% 0%,rgba(47,123,247,.12),transparent 60%);pointer-events:none"></div>
+    <div style="position:relative;max-width:960px;margin:0 auto">
+      <div style="text-align:center;max-width:620px;margin:0 auto 44px">
+        <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#2F7BF7">Comienza hoy</div>
+        <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .06s;font-family:'Space Grotesk';font-weight:700;font-size:clamp(30px,3.8vw,50px);letter-spacing:-1px;margin:14px 0 0">Agenda tu consulta</h2>
+        <p data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .12s;font-size:17px;color:#AEB9CC;margin:16px 0 0;line-height:1.6">En unos segundos. Al terminar te conectamos por WhatsApp para confirmar.</p>
+      </div>
+
+      <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .8s ease;background:#0F1626;border:1px solid rgba(255,255,255,.1);border-radius:24px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.45)">
+        <!-- progress -->
+        <sc-if value="{{ notBooked }}" hint-placeholder-val="{{ true }}">
+          <div style="padding:22px 30px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:16px">
+            <div style="flex:1;height:6px;background:#1a2437;border-radius:6px;overflow:hidden">
+              <div style="height:100%;background:linear-gradient(90deg,#2F7BF7,#2FD9C4);border-radius:6px;transition:width .5s cubic-bezier(.2,.7,.2,1);width:{{ progressPct }}"></div>
+            </div>
+            <div style="font-size:13px;color:#93A0B8;font-weight:600;white-space:nowrap">Paso {{ step }} de 4</div>
+          </div>
+        </sc-if>
+
+        <div style="padding:clamp(26px,4vw,44px)">
+          <!-- STEP 1: ubicación -->
+          <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
+            <div>
+              <h3 style="font-family:'Space Grotesk';font-weight:600;font-size:23px;margin:0 0 6px">¿En qué consultorio?</h3>
+              <p style="font-size:15px;color:#93A0B8;margin:0 0 24px">Elige la ubicación que te quede mejor.</p>
+              <div style="display:grid;gap:14px">
+                <sc-for list="{{ locations }}" as="loc" hint-placeholder-count="2">
+                  <button onClick="{{ loc.onSelect }}" style="{{ loc.style }}">
+                    <div style="font-family:'Space Grotesk';font-weight:600;font-size:18px;color:#fff">{{ loc.name }}</div>
+                    <div style="font-size:14px;color:#93A0B8;margin-top:4px">{{ loc.addr }}</div>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- STEP 2: motivo + zona -->
+          <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
+            <div>
+              <h3 style="font-family:'Space Grotesk';font-weight:600;font-size:23px;margin:0 0 6px">¿Cuál es el motivo?</h3>
+              <p style="font-size:15px;color:#93A0B8;margin:0 0 20px">Selecciona el motivo de tu consulta.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px">
+                <sc-for list="{{ motivos }}" as="m" hint-placeholder-count="6">
+                  <button onClick="{{ m.onSelect }}" style="{{ m.style }}">{{ m.label }}</button>
+                </sc-for>
+              </div>
+              <div style="font-weight:600;font-size:15px;margin-bottom:12px;color:#DCE3EF">Zona afectada <span style="color:#93A0B8;font-weight:500">(opcional, varias)</span></div>
+              <div style="display:flex;flex-wrap:wrap;gap:10px">
+                <sc-for list="{{ zones }}" as="z" hint-placeholder-count="8">
+                  <button onClick="{{ z.onSelect }}" style="{{ z.style }}">{{ z.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- STEP 3: fecha y hora -->
+          <sc-if value="{{ isStep3 }}" hint-placeholder-val="{{ false }}">
+            <div>
+              <h3 style="font-family:'Space Grotesk';font-weight:600;font-size:23px;margin:0 0 6px">Elige fecha y hora</h3>
+              <p style="font-size:15px;color:#93A0B8;margin:0 0 20px">Días hábiles disponibles. Confirmamos por WhatsApp.</p>
+              <div style="display:flex;gap:10px;overflow-x:auto;padding-bottom:10px;margin-bottom:24px">
+                <sc-for list="{{ days }}" as="d" hint-placeholder-count="8">
+                  <button onClick="{{ d.onSelect }}" style="{{ d.style }}">
+                    <div style="font-size:12px;color:#93A0B8;text-transform:uppercase;letter-spacing:.5px">{{ d.dow }}</div>
+                    <div style="font-family:'Space Grotesk';font-weight:700;font-size:22px;color:#fff;margin-top:2px">{{ d.day }}</div>
+                    <div style="font-size:11px;color:#93A0B8">{{ d.mon }}</div>
+                  </button>
+                </sc-for>
+              </div>
+              <div style="font-weight:600;font-size:15px;margin-bottom:12px;color:#DCE3EF">Horario</div>
+              <div style="display:flex;flex-wrap:wrap;gap:10px">
+                <sc-for list="{{ times }}" as="t" hint-placeholder-count="6">
+                  <button onClick="{{ t.onSelect }}" style="{{ t.style }}">{{ t.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- STEP 4: datos -->
+          <sc-if value="{{ isStep4 }}" hint-placeholder-val="{{ false }}">
+            <div>
+              <h3 style="font-family:'Space Grotesk';font-weight:600;font-size:23px;margin:0 0 6px">Tus datos</h3>
+              <p style="font-size:15px;color:#93A0B8;margin:0 0 22px">Para confirmar tu cita contigo.</p>
+              <div style="display:grid;gap:14px">
+                <input value="{{ fName }}" onInput="{{ onName }}" placeholder="Tu nombre completo" style="width:100%;padding:15px 16px;background:#0A1020;border:1px solid rgba(255,255,255,.14);border-radius:12px;color:#fff;font:inherit;font-size:15px;outline:none">
+                <input value="{{ fPhone }}" onInput="{{ onPhone }}" inputmode="tel" placeholder="Tu teléfono (WhatsApp)" style="width:100%;padding:15px 16px;background:#0A1020;border:1px solid rgba(255,255,255,.14);border-radius:12px;color:#fff;font:inherit;font-size:15px;outline:none">
+                <textarea value="{{ fNotes }}" onInput="{{ onNotes }}" placeholder="Cuéntanos brevemente qué te pasa (opcional)" rows="3" style="width:100%;padding:15px 16px;background:#0A1020;border:1px solid rgba(255,255,255,.14);border-radius:12px;color:#fff;font:inherit;font-size:15px;outline:none;resize:vertical"></textarea>
+              </div>
+              <div style="margin-top:22px;padding:18px 20px;background:#0A1020;border:1px solid rgba(255,255,255,.08);border-radius:14px">
+                <div style="font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#2F7BF7;font-weight:700;margin-bottom:12px">Resumen</div>
+                <div style="display:grid;gap:8px;font-size:14.5px;color:#DCE3EF">
+                  <div style="display:flex;justify-content:space-between;gap:16px"><span style="color:#93A0B8">Consultorio</span><span style="text-align:right;font-weight:600">{{ sumLoc }}</span></div>
+                  <div style="display:flex;justify-content:space-between;gap:16px"><span style="color:#93A0B8">Motivo</span><span style="text-align:right;font-weight:600">{{ sumMotivo }}</span></div>
+                  <div style="display:flex;justify-content:space-between;gap:16px"><span style="color:#93A0B8">Fecha</span><span style="text-align:right;font-weight:600">{{ sumDate }}</span></div>
+                  <div style="display:flex;justify-content:space-between;gap:16px"><span style="color:#93A0B8">Hora</span><span style="text-align:right;font-weight:600">{{ sumTime }}</span></div>
+                </div>
+              </div>
+              <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top:14px;color:#FF8A8A;font-size:14px">{{ errorMsg }}</div>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <!-- nav buttons -->
+          <sc-if value="{{ notBooked }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:32px">
+              <button onClick="{{ back }}" style="{{ backStyle }}">← Atrás</button>
+              <button onClick="{{ next }}" style="{{ nextStyle }}">{{ nextLabel }}</button>
+            </div>
+          </sc-if>
+
+          <!-- CONFIRMATION -->
+          <sc-if value="{{ booked }}" hint-placeholder-val="{{ false }}">
+            <div style="text-align:center;padding:20px 0">
+              <div style="width:74px;height:74px;margin:0 auto;border-radius:50%;background:rgba(47,217,196,.15);color:#2FD9C4;display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:700">✓</div>
+              <h3 style="font-family:'Space Grotesk';font-weight:700;font-size:26px;margin:22px 0 8px">¡Solicitud recibida!</h3>
+              <p style="font-size:16px;color:#AEB9CC;max-width:440px;margin:0 auto 8px;line-height:1.6">Gracias {{ fName }}. Tu solicitud para el <strong style="color:#fff">{{ sumDate }} a las {{ sumTime }}</strong> quedó registrada.</p>
+              <p style="font-size:15px;color:#93A0B8;max-width:440px;margin:0 auto 26px">Presiona el botón para confirmarla ahora mismo por WhatsApp.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
+                <a href="{{ waHref }}" target="_blank" style="display:inline-flex;align-items:center;gap:9px;background:#25D366;color:#04240f;padding:15px 26px;border-radius:13px;font-weight:700;font-size:15.5px">Confirmar por WhatsApp</a>
+                <button onClick="{{ reset }}" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#EEF2F8;padding:15px 24px;border-radius:13px;font-weight:600;font-size:15px;cursor:pointer;font-family:inherit">Agendar otra</button>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TESTIMONIOS ===================== -->
+  <section id="testimonios" data-screen-label="Testimonios" style="padding:clamp(70px,9vw,130px) clamp(20px,5vw,64px);background:#0A1020">
+    <div style="max-width:1200px;margin:0 auto">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:44px">
+        <div>
+          <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#2F7BF7">Historias de pacientes</div>
+          <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .06s;font-family:'Space Grotesk';font-weight:700;font-size:clamp(30px,3.8vw,50px);letter-spacing:-1px;margin:14px 0 0">Voces de vitalidad</h2>
+        </div>
+        <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .1s;display:flex;align-items:center;gap:12px;padding:12px 18px;background:#0F1626;border:1px solid rgba(255,255,255,.09);border-radius:14px">
+          <div style="font-family:'Space Grotesk';font-weight:700;font-size:30px;color:#fff">4.5</div>
+          <div><div style="color:#F5B400;font-size:15px;letter-spacing:2px">★★★★★</div><div style="font-size:12.5px;color:#93A0B8">26 reseñas · Google</div></div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+        <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
+          <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .7s cubic-bezier(.2,.7,.2,1);background:#0F1626;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:26px 24px;display:flex;flex-direction:column;gap:14px">
+            <div style="color:#F5B400;font-size:15px;letter-spacing:2px">★★★★★</div>
+            <p style="font-size:15px;line-height:1.6;color:#DCE3EF;margin:0;flex:1">{{ r.text }}</p>
+            <div style="display:flex;align-items:center;gap:12px;padding-top:8px;border-top:1px solid rgba(255,255,255,.07)">
+              <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#2F7BF7,#2FD9C4);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-family:'Space Grotesk'">{{ r.initial }}</div>
+              <div><div style="font-weight:600;font-size:14.5px">{{ r.name }}</div><div style="font-size:12.5px;color:#93A0B8">{{ r.when }}</div></div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ASEGURADORAS ===================== -->
+  <section data-screen-label="Aseguradoras" style="padding:clamp(50px,6vw,80px) clamp(20px,5vw,64px);background:linear-gradient(180deg,#0A1020,#080D18)">
+    <div style="max-width:1100px;margin:0 auto;text-align:center">
+      <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#2FD9C4">Reduce costos</div>
+      <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .06s;font-family:'Space Grotesk';font-weight:700;font-size:clamp(26px,3vw,38px);letter-spacing:-.6px;margin:12px 0 8px">Trabajamos con tu aseguradora</h2>
+      <p data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .12s;font-size:16px;color:#93A0B8;max-width:520px;margin:0 auto 36px">Si no ves la tuya en el listado, no te preocupes: hacemos convenio con todas las aseguradoras.</p>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+        <sc-for list="{{ insurers }}" as="ins" hint-placeholder-count="8">
+          <div data-reveal style="opacity:0;transform:translateY(16px);transition:all .6s ease;height:66px;display:flex;align-items:center;justify-content:center;background:#0F1626;border:1px solid rgba(255,255,255,.08);border-radius:12px;font-family:'Space Grotesk';font-weight:600;font-size:15px;color:#C4CEDE;letter-spacing:.3px">{{ ins }}</div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== UBICACIONES ===================== -->
+  <section id="ubicaciones" data-screen-label="Ubicaciones" style="padding:clamp(70px,9vw,130px) clamp(20px,5vw,64px);background:#080D18">
+    <div style="max-width:1200px;margin:0 auto">
+      <div style="text-align:center;max-width:600px;margin:0 auto 48px">
+        <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#2F7BF7">Dónde encontrarnos</div>
+        <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .06s;font-family:'Space Grotesk';font-weight:700;font-size:clamp(30px,3.6vw,46px);letter-spacing:-1px;margin:14px 0 0">Consultorios en Guadalajara</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+        <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .8s ease;background:#0F1626;border:1px solid rgba(255,255,255,.09);border-radius:20px;overflow:hidden">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3732.4637376807877!2d-103.3705937!3d20.691385199999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428af5bf64f4bdd%3A0xb254acc91c249c41!2sDr.%20Jonathan%20Galindo%20-%20Traumat%C3%B3logo%20y%20Ortopedista!5e0!3m2!1ses-419!2smx!4v1677953522106!5m2!1ses-419!2smx" style="width:100%;height:230px;border:0;filter:grayscale(.3) invert(.9) hue-rotate(180deg)" loading="lazy"></iframe>
+          <div style="padding:24px">
+            <h3 style="font-family:'Space Grotesk';font-weight:600;font-size:19px;margin:0 0 8px">Hospital México Americano</h3>
+            <p style="font-size:14.5px;color:#93A0B8;margin:0 0 14px;line-height:1.5">C. Colomos 2113, Ayuntamiento, 44620 Guadalajara, Jal.</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;font-size:13px">
+              <span style="padding:6px 12px;background:rgba(47,123,247,.12);color:#9FC2FF;border-radius:100px;font-weight:600">Lun–Vie · previa cita</span>
+              <span style="padding:6px 12px;background:rgba(47,217,196,.12);color:#7EE6D8;border-radius:100px;font-weight:600">Urgencias 24h</span>
+            </div>
+          </div>
+        </div>
+        <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .8s ease .1s;background:#0F1626;border:1px solid rgba(255,255,255,.09);border-radius:20px;overflow:hidden">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3732.8861935101077!2d-103.28087484944868!3d20.67420858612381!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428b19862b58d55%3A0xfe3f1c2bca4ca348!2sDr.%20Jonathan%20Galindo%20-%20Traumat%C3%B3logo%20y%20Ortopedista!5e0!3m2!1ses-419!2smx!4v1612393336659!5m2!1ses-419!2smx" style="width:100%;height:230px;border:0;filter:grayscale(.3) invert(.9) hue-rotate(180deg)" loading="lazy"></iframe>
+          <div style="padding:24px">
+            <h3 style="font-family:'Space Grotesk';font-weight:600;font-size:19px;margin:0 0 8px">Hospital Siloé</h3>
+            <p style="font-size:14.5px;color:#93A0B8;margin:0 0 14px;line-height:1.5">Ramón López Velarde 3843, CP 44770, Guadalajara, Jal.</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;font-size:13px">
+              <span style="padding:6px 12px;background:rgba(47,123,247,.12);color:#9FC2FF;border-radius:100px;font-weight:600">Lun–Vie · previa cita</span>
+              <span style="padding:6px 12px;background:rgba(47,217,196,.12);color:#7EE6D8;border-radius:100px;font-weight:600">Urgencias 24h</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:40px">
+        <a href="tel:3322740493" style="display:inline-flex;align-items:center;gap:10px;background:#0F1626;border:1px solid rgba(255,255,255,.12);padding:16px 26px;border-radius:14px;color:#EEF2F8;font-weight:600">📞 (33) 2274 0493</a>
+        <a href="mailto:medico@drjonathangalindo.com" style="display:inline-flex;align-items:center;gap:10px;background:#0F1626;border:1px solid rgba(255,255,255,.12);padding:16px 26px;border-radius:14px;color:#EEF2F8;font-weight:600">✉ medico@drjonathangalindo.com</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer style="padding:clamp(50px,6vw,72px) clamp(20px,5vw,64px) 40px;background:#060A12;border-top:1px solid rgba(255,255,255,.07)">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;align-items:start">
+      <div>
+        <div style="display:flex;align-items:center;gap:13px">
+          <div style="width:44px;height:44px;border-radius:13px;background:linear-gradient(135deg,#2F7BF7,#1E56C8);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700;font-size:18px;color:#fff">JG</div>
+          <div><div style="font-family:'Space Grotesk';font-weight:600;font-size:17px">Dr. Jonathan Galindo</div><div style="font-size:12px;color:#93A0B8">Ortopedia · Medicina Deportiva</div></div>
+        </div>
+        <p style="font-size:14px;color:#93A0B8;line-height:1.6;margin:18px 0 0;max-width:340px">Médico ortopedista y traumatólogo, especialista en cirugía del deporte y artroscopía en Guadalajara.</p>
+      </div>
+      <div>
+        <div style="font-family:'Space Grotesk';font-weight:600;font-size:15px;margin-bottom:14px">Navegación</div>
+        <div style="display:grid;gap:9px;font-size:14px">
+          <a href="#doctor" style="color:#93A0B8">Doctor</a>
+          <a href="#servicios" style="color:#93A0B8">Servicios</a>
+          <a href="#plantillas" style="color:#93A0B8">Plantillas</a>
+          <a href="#citas" style="color:#93A0B8">Agendar cita</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Space Grotesk';font-weight:600;font-size:15px;margin-bottom:14px">Contacto</div>
+        <div style="display:grid;gap:9px;font-size:14px;color:#93A0B8">
+          <a href="tel:3322740493" style="color:#93A0B8">(33) 2274 0493</a>
+          <a href="mailto:medico@drjonathangalindo.com" style="color:#93A0B8">medico@drjonathangalindo.com</a>
+          <span>Urgencias · 24 horas</span>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1200px;margin:36px auto 0;padding-top:22px;border-top:1px solid rgba(255,255,255,.06);font-size:13px;color:#6C7891;text-align:center">© 2026 Dr. Jonathan Galindo Contreras · Guadalajara, México</div>
+  </footer>
+
+  <!-- ===================== CHAT ASISTENTE ===================== -->
+  <div style="position:fixed;right:22px;bottom:22px;z-index:200;display:flex;flex-direction:column;align-items:flex-end;gap:14px">
+    <sc-if value="{{ chatOpen }}" hint-placeholder-val="{{ false }}">
+      <div ref="{{ chatBodyOuter }}" style="width:min(360px,calc(100vw - 44px));background:#0F1626;border:1px solid rgba(255,255,255,.12);border-radius:20px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.55);animation:chatIn .3s cubic-bezier(.2,.7,.2,1)">
+        <div style="padding:16px 18px;background:linear-gradient(135deg,#2F7BF7,#1E56C8);display:flex;align-items:center;gap:12px">
+          <div style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700;color:#fff">JG</div>
+          <div style="flex:1">
+            <div style="font-weight:600;font-size:15px;color:#fff">Asistente · Dr. Galindo</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.85);display:flex;align-items:center;gap:6px"><span style="width:7px;height:7px;border-radius:50%;background:#7EFFB0"></span>En línea</div>
+          </div>
+          <button onClick="{{ toggleChat }}" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:30px;height:30px;border-radius:9px;cursor:pointer;font-size:16px;line-height:1">✕</button>
+        </div>
+        <div ref="{{ chatScroll }}" style="max-height:320px;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ chatMsgs }}" as="msg" hint-placeholder-count="1">
+            <div style="{{ msg.wrap }}">
+              <div style="{{ msg.bubble }}">{{ msg.text }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="padding:12px 16px 16px;border-top:1px solid rgba(255,255,255,.08)">
+          <div style="font-size:11.5px;color:#6C7891;text-transform:uppercase;letter-spacing:.8px;margin-bottom:9px">Preguntas rápidas</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ quickReplies }}" as="q" hint-placeholder-count="4">
+              <button onClick="{{ q.onSelect }}" style="padding:9px 13px;background:#141D30;border:1px solid rgba(47,123,247,.3);border-radius:100px;color:#9FC2FF;font:inherit;font-size:13px;font-weight:600;cursor:pointer" style-hover="background:rgba(47,123,247,.15)">{{ q.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+    <button onClick="{{ toggleChat }}" style="width:60px;height:60px;border-radius:50%;border:none;background:linear-gradient(135deg,#2F7BF7,#1E56C8);color:#fff;font-size:26px;cursor:pointer;box-shadow:0 14px 34px rgba(47,123,247,.5);animation:pulseRing 2.6s ease-out infinite;display:flex;align-items:center;justify-content:center">{{ chatIcon }}</button>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    navSolid: false,
+    step: 1,
+    loc: null,
+    motivo: null,
+    zones: [],
+    date: null,
+    time: null,
+    name: '',
+    phone: '',
+    notes: '',
+    error: '',
+    booked: false,
+    chatOpen: false,
+    chatMsgs: [{ from: 'bot', text: '¡Hola! Soy el asistente del Dr. Jona Galindo 👋 ¿En qué puedo ayudarte hoy?' }],
+  };
+
+  LOCATIONS = [
+    { id: 'mexamer', name: 'Hospital México Americano', addr: 'C. Colomos 2113, Ayuntamiento' },
+    { id: 'siloe', name: 'Hospital Siloé', addr: 'Ramón López Velarde 3843' },
+  ];
+  MOTIVOS = ['Lesión deportiva', 'Dolor articular', 'Fractura / urgencia', 'Revisión y seguimiento', 'Plantillas personalizadas', 'Segunda opinión'];
+  ZONES = ['Rodilla', 'Hombro', 'Cadera', 'Columna', 'Tobillo / pie', 'Codo / muñeca', 'Mano', 'Otra'];
+  TIMES = ['09:00', '10:00', '11:00', '12:00', '16:00', '17:00', '18:00'];
+  DOW = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+  MON = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
+  componentDidMount() {
+    // scroll reveal
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'none';
+          this._io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    // counters
+    this._co = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { this.animateCount(e.target); this._co.unobserve(e.target); }
+      });
+    }, { threshold: 0.5 });
+    this._scan();
+    this._onScroll = () => {
+      const solid = window.scrollY > 40;
+      if (solid !== this.state.navSolid) this.setState({ navSolid: solid });
+      this._applyNav(solid);
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._applyNav(false);
+  }
+  componentDidUpdate() { this._scan(); this._scrollChat(); }
+  componentWillUnmount() { window.removeEventListener('scroll', this._onScroll); }
+
+  _scan() {
+    document.querySelectorAll('[data-reveal]').forEach((el) => { if (!el._rvd) { el._rvd = 1; this._io.observe(el); } });
+    document.querySelectorAll('[data-count]').forEach((el) => { if (!el._cvd) { el._cvd = 1; this._co.observe(el); } });
+  }
+  _applyNav(solid) {
+    if (!this._nav) return;
+    if (solid) {
+      this._nav.style.background = 'rgba(8,13,24,.85)';
+      this._nav.style.backdropFilter = 'blur(14px)';
+      this._nav.style.borderBottomColor = 'rgba(255,255,255,.08)';
+      this._nav.style.paddingTop = '13px';
+      this._nav.style.paddingBottom = '13px';
+    } else {
+      this._nav.style.background = 'transparent';
+      this._nav.style.backdropFilter = 'none';
+      this._nav.style.borderBottomColor = 'transparent';
+      this._nav.style.paddingTop = '18px';
+      this._nav.style.paddingBottom = '18px';
+    }
+  }
+  animateCount(el) {
+    const target = parseFloat(el.getAttribute('data-count'));
+    const suffix = el.getAttribute('data-suffix') || '';
+    const dur = 1400; const start = performance.now();
+    const tick = (now) => {
+      const p = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.round(target * eased);
+      el.textContent = (target >= 1000 ? val.toLocaleString('es-MX') : val) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+  _scrollChat() {
+    if (this._chatScroll) this._chatScroll.scrollTop = this._chatScroll.scrollHeight;
+  }
+
+  chipStyle(sel, block) {
+    const base = 'font:inherit;font-size:15px;cursor:pointer;border-radius:12px;transition:all .18s;' + (block ? 'width:100%;text-align:left;padding:18px 20px;' : 'padding:12px 16px;');
+    if (sel) return base + 'border:1px solid #2F7BF7;background:rgba(47,123,247,.16);color:#fff;box-shadow:0 0 0 1px #2F7BF7 inset;';
+    return base + 'border:1px solid rgba(255,255,255,.13);background:#0A1020;color:#C4CEDE;';
+  }
+  dayStyle(sel) {
+    const base = 'font:inherit;cursor:pointer;border-radius:14px;padding:12px 4px;min-width:66px;text-align:center;transition:all .18s;flex:none;';
+    if (sel) return base + 'border:1px solid #2F7BF7;background:rgba(47,123,247,.16);box-shadow:0 0 0 1px #2F7BF7 inset;';
+    return base + 'border:1px solid rgba(255,255,255,.13);background:#0A1020;';
+  }
+
+  buildDays() {
+    const out = []; const d = new Date(); d.setHours(0, 0, 0, 0);
+    while (out.length < 8) {
+      d.setDate(d.getDate() + 1);
+      const dow = d.getDay();
+      if (dow === 0 || dow === 6) continue;
+      out.push({ iso: d.toISOString().slice(0, 10), dow: this.DOW[dow], day: String(d.getDate()), mon: this.MON[d.getMonth()], full: `${this.DOW[dow]} ${d.getDate()} ${this.MON[d.getMonth()]}` });
+    }
+    return out;
+  }
+
+  next = () => {
+    const s = this.state;
+    if (s.step === 1 && !s.loc) { this.setState({ error: 'Elige un consultorio.' }); return; }
+    if (s.step === 2 && !s.motivo) { this.setState({ error: 'Selecciona el motivo de tu consulta.' }); return; }
+    if (s.step === 3 && (!s.date || !s.time)) { this.setState({ error: 'Elige fecha y horario.' }); return; }
+    if (s.step === 4) {
+      if (!s.name.trim() || s.phone.replace(/\D/g, '').length < 8) { this.setState({ error: 'Escribe tu nombre y un teléfono válido.' }); return; }
+      this.setState({ booked: true, error: '' }); return;
+    }
+    this.setState({ step: s.step + 1, error: '' });
+  };
+  back = () => {
+    if (this.state.step > 1) this.setState({ step: this.state.step - 1, error: '' });
+  };
+  reset = () => this.setState({ step: 1, loc: null, motivo: null, zones: [], date: null, time: null, name: '', phone: '', notes: '', booked: false, error: '' });
+
+  toggleZone(z) {
+    const has = this.state.zones.includes(z);
+    this.setState({ zones: has ? this.state.zones.filter((x) => x !== z) : [...this.state.zones, z] });
+  }
+
+  toggleChat = () => this.setState({ chatOpen: !this.state.chatOpen });
+  sendQuick(q) {
+    const replies = {
+      'Agendar una cita': 'Perfecto 📅 Puedes agendar en la sección "Agenda tu consulta" aquí arriba, o te confirmo por WhatsApp al (33) 2274 0493.',
+      '¿Atienden urgencias?': 'Sí, atendemos urgencias las 24 horas. Llama al (33) 2274 0493 y te orientamos de inmediato.',
+      'Plantillas personalizadas': 'Hacemos plantillas a la medida para deportistas, postura y más. ¿Te comparto info por WhatsApp?',
+      '¿Aceptan mi seguro?': 'Trabajamos con todas las aseguradoras y hacemos convenio aunque no esté en el listado. ¿Cuál tienes?',
+      'Ubicación de consultorios': 'Estamos en Hospital México Americano (Col. Colomos) y Hospital Siloé, ambos en Guadalajara.',
+    };
+    const bot = replies[q] || 'Con gusto te ayudo. Escríbenos por WhatsApp al (33) 2274 0493 para más detalles.';
+    this.setState({ chatMsgs: [...this.state.chatMsgs, { from: 'me', text: q }, { from: 'bot', text: bot }] });
+  }
+
+  renderVals() {
+    const s = this.state;
+    const days = this.buildDays();
+    const locName = s.loc ? this.LOCATIONS.find((l) => l.id === s.loc).name : '—';
+    const dayObj = s.date ? days.find((d) => d.iso === s.date) : null;
+    const sumDate = dayObj ? dayObj.full : '—';
+    const zonesTxt = s.zones.length ? ' (' + s.zones.join(', ') + ')' : '';
+    const waText = `Hola Dr. Galindo, quiero agendar una cita.%0A%0A👤 ${s.name}%0A📞 ${s.phone}%0A🏥 ${locName}%0A📋 ${s.motivo || ''}${zonesTxt}%0A📅 ${sumDate} a las ${s.time || ''}%0A${s.notes ? '📝 ' + s.notes : ''}`;
+
+    return {
+      navRef: (el) => { this._nav = el; },
+      chatScroll: (el) => { this._chatScroll = el; },
+      chatBodyOuter: () => {},
+
+      services: [
+        { num: '01', title: 'Artroscopía', desc: 'Para tratar problemas dentro de la articulación: rodilla, cadera y hombro.' },
+        { num: '02', title: 'Reparación de tejidos blandos', desc: 'Para ligamentos y tendones desgarrados.' },
+        { num: '03', title: 'Reemplazo articular', desc: 'Cuando una articulación dañada se reemplaza con una prótesis.' },
+        { num: '04', title: 'Cirugía articular', desc: 'Reemplazo de un implante preexistente por uno nuevo.' },
+        { num: '05', title: 'Reparación de fracturas', desc: 'Reposicionamiento con placas, tornillos o clavos según el caso.' },
+        { num: '06', title: 'Desbridamiento', desc: 'Eliminación de tejidos blandos u óseos dañados por infección o fractura.' },
+        { num: '07', title: 'Fusión de huesos', desc: 'Fusión de huesos con injertos cuando se requiere.' },
+        { num: '08', title: 'Fusión de columna', desc: 'Unión de los huesos de la columna (vértebras).' },
+        { num: '09', title: 'Osteotomía', desc: 'Dirigida a corregir deformidades óseas.' },
+      ],
+      reviews: [
+        { text: 'Excelente doctor, muy buena persona y demasiado acertado en sus diagnósticos. Me fracturé la rodilla y hoy está como si no hubiera pasado nada.', name: 'Juan Ramón Gálvez', when: 'Hace un año', initial: 'J' },
+        { text: 'Es un excelente doctor, gracias a él mi mamá salió adelante. Se preocupa mucho por sus pacientes. Lo recomiendo al 100%.', name: 'Gabriela Plascencia', when: 'Hace 5 años', initial: 'G' },
+        { text: 'Profesional y con calidez humana. Tuve una ruptura de tendón y me sacó adelante. Lo recomiendo ampliamente.', name: 'Javier Amigo', when: 'Hace 3 años', initial: 'J' },
+      ],
+      insurers: ['GNP', 'AXA', 'MetLife', 'Seguros Monterrey', 'Atlas', 'Mapfre', 'Plan Seguro', 'BUPA'],
+
+      // booking state
+      step: s.step,
+      progressPct: (s.step / 4 * 100) + '%',
+      notBooked: !s.booked,
+      booked: s.booked,
+      isStep1: !s.booked && s.step === 1,
+      isStep2: !s.booked && s.step === 2,
+      isStep3: !s.booked && s.step === 3,
+      isStep4: !s.booked && s.step === 4,
+      hasError: !!s.error,
+      errorMsg: s.error,
+
+      locations: this.LOCATIONS.map((l) => ({ ...l, style: this.chipStyle(s.loc === l.id, true), onSelect: () => this.setState({ loc: l.id, error: '' }) })),
+      motivos: this.MOTIVOS.map((m) => ({ label: m, style: this.chipStyle(s.motivo === m, false), onSelect: () => this.setState({ motivo: m, error: '' }) })),
+      zones: this.ZONES.map((z) => ({ label: z, style: this.chipStyle(s.zones.includes(z), false), onSelect: () => this.toggleZone(z) })),
+      days: days.map((d) => ({ ...d, style: this.dayStyle(s.date === d.iso), onSelect: () => this.setState({ date: d.iso, error: '' }) })),
+      times: this.TIMES.map((t) => ({ label: t, style: this.chipStyle(s.time === t, false), onSelect: () => this.setState({ time: t, error: '' }) })),
+
+      fName: s.name, fPhone: s.phone, fNotes: s.notes,
+      onName: (e) => this.setState({ name: e.target.value }),
+      onPhone: (e) => this.setState({ phone: e.target.value }),
+      onNotes: (e) => this.setState({ notes: e.target.value }),
+
+      sumLoc: locName,
+      sumMotivo: (s.motivo || '—') + zonesTxt,
+      sumDate,
+      sumTime: s.time || '—',
+      waHref: `https://api.whatsapp.com/send?phone=5213322740493&text=${waText}`,
+
+      next: this.next, back: this.back, reset: this.reset,
+      nextLabel: s.step === 4 ? 'Confirmar cita ✓' : 'Continuar →',
+      nextStyle: 'font:inherit;font-size:15.5px;font-weight:700;cursor:pointer;padding:15px 28px;border-radius:12px;border:none;background:#2F7BF7;color:#fff;box-shadow:0 10px 26px rgba(47,123,247,.4);',
+      backStyle: 'font:inherit;font-size:15px;font-weight:600;cursor:pointer;padding:15px 22px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:transparent;color:' + (s.step === 1 ? 'rgba(255,255,255,.25)' : '#C4CEDE') + ';',
+
+      // chat
+      chatOpen: s.chatOpen,
+      chatIcon: s.chatOpen ? '✕' : '💬',
+      toggleChat: this.toggleChat,
+      chatMsgs: s.chatMsgs.map((m) => ({
+        text: m.text,
+        wrap: 'display:flex;justify-content:' + (m.from === 'me' ? 'flex-end' : 'flex-start'),
+        bubble: 'max-width:82%;padding:11px 14px;border-radius:15px;font-size:14px;line-height:1.5;' + (m.from === 'me' ? 'background:#2F7BF7;color:#fff;border-bottom-right-radius:5px;' : 'background:#141D30;color:#DCE3EF;border:1px solid rgba(255,255,255,.07);border-bottom-left-radius:5px;'),
+      })),
+      quickReplies: ['Agendar una cita', '¿Atienden urgencias?', 'Plantillas personalizadas', '¿Aceptan mi seguro?', 'Ubicación de consultorios'].map((q) => ({ label: q, onSelect: () => this.sendQuick(q) })),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<!doctype html><html><body style="margin:0;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:#000;font-family:sans-serif">
+<script>
+const ids=["photo-1579684385127-1ef15d508118","photo-1594824476967-48c8b964273f","photo-1516549655169-df83a0774514","photo-1622253692010-333f2da6031d","photo-1530026405186-ed1f139313f8","photo-1666214280557-f1b5022eb634","photo-1512678080530-7760d81faba6","photo-1584982751601-97dcc096659c","photo-1519494026892-80bbd2d6fd0d","photo-1576091160399-112ba8d25d1d","photo-1631217868264-e5b90bb7e133","photo-1571019613454-1cb2f99b2d8b","photo-1559757148-5c350d0d3c56","photo-1505751172876-fa1923c5c528","photo-1612349317150-e413f6a5b16d","photo-1622902046580-2b47f47f5471"];
+document.write(ids.map(id=>`<div style="position:relative"><img src="https://images.unsplash.com/${id}?w=240&q=60&auto=format&fit=crop" style="width:100%;height:150px;object-fit:cover;display:block"><span style="position:absolute;bottom:0;left:0;background:#000;color:#0f0;font-size:9px;padding:2px">${id.slice(6,16)}</span></div>`).join(''));
+</script>
+</body></html>
