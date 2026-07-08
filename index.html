@@ -477,7 +477,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <p style="font-size:16px;color:#4A5B7C;max-width:440px;margin:0 auto 8px;line-height:1.6">Gracias {{ fName }}. Tu solicitud para el <strong style="color:#16294F">{{ sumDate }} a las {{ sumTime }}</strong> quedó registrada.</p>
               <p style="font-size:15px;color:#5B6B85;max-width:440px;margin:0 auto 26px">Presiona el botón para confirmarla ahora mismo por WhatsApp.</p>
               <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
-                <a href="{{ waHref }}" target="_blank" style="display:inline-flex;align-items:center;gap:9px;background:#25D366;color:#fff;padding:15px 26px;border-radius:13px;font-weight:700;font-size:15.5px">Confirmar por WhatsApp</a>
+                <a href="{{ waHref }}" target="_blank" style="display:inline-flex;align-items:center;gap:9px;background:#25D366;color:#fff;padding:15px 26px;border-radius:13px;font-weight:700;font-size:15.5px">Abrir Whatsapp para confirmar</a>
                 <button onClick="{{ reset }}" style="background:#fff;border:1px solid #D8E0EE;color:#33456B;padding:15px 24px;border-radius:13px;font-weight:600;font-size:15px;cursor:pointer;font-family:inherit">Agendar otra</button>
               </div>
             </div>
@@ -628,7 +628,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
           <div style="display:flex;flex-wrap:wrap;gap:12px">
             <button onClick="{{ modal.onBook }}" style="flex:1;min-width:200px;font:inherit;font-size:15.5px;font-weight:700;cursor:pointer;padding:16px 24px;border-radius:13px;border:none;background:#1B449C;color:#fff;box-shadow:0 10px 26px rgba(27,68,156,.3)">Agendar esta consulta →</button>
-            <a href="https://api.whatsapp.com/send?phone=5213322740493" target="_blank" style="flex:1;min-width:160px;text-align:center;font-size:15.5px;font-weight:700;padding:16px 24px;border-radius:13px;background:#F3F9F0;border:1px solid #DDEBD3;color:#3D8A24">Preguntar por WhatsApp</a>
+            <a href="https://api.whatsapp.com/send?phone=5213322740493" target="_blank" style="flex:1;min-width:160px;text-align:center;font-size:15.5px;font-weight:700;padding:16px 24px;border-radius:13px;background:#F3F9F0;border:1px solid #DDEBD3;color:#3D8A24">Abrir Whatsapp para preguntar</a>
           </div>
         </div>
       </div>
@@ -885,6 +885,14 @@ class Component extends DCLogic {
     return out;
   }
 
+  fireBookingConversion() {
+    const iframe = document.createElement('iframe');
+    iframe.src = '/gracias/';
+    iframe.style.cssText = 'position:absolute;width:0;height:0;border:0;visibility:hidden';
+    iframe.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(iframe);
+  }
+
   next = () => {
     const s = this.state;
     if (s.step === 1 && !s.loc) { this.setState({ error: 'Elige un consultorio.' }); return; }
@@ -892,7 +900,9 @@ class Component extends DCLogic {
     if (s.step === 3 && (!s.date || !s.time)) { this.setState({ error: 'Elige fecha y horario.' }); return; }
     if (s.step === 4) {
       if (!s.name.trim() || s.phone.replace(/\D/g, '').length < 8) { this.setState({ error: 'Escribe tu nombre y un teléfono válido.' }); return; }
-      this.setState({ booked: true, error: '' }); return;
+      this.setState({ booked: true, error: '' });
+      this.fireBookingConversion();
+      return;
     }
     this.setState({ step: s.step + 1, error: '' });
   };
