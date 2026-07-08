@@ -23,7 +23,6 @@
 <style>
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; overflow-x: hidden; }
-  body { overflow-x: hidden; }
   body { margin: 0; background: #FFFFFF; color: #16294F; font-family: 'Source Sans 3', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
   a { color: #1B449C; text-decoration: none; }
   a:hover { color: #3563C4; }
@@ -58,7 +57,7 @@
 <div style="max-width:100%;overflow-x:hidden;position:relative">
 
   <!-- ===================== NAV ===================== -->
-  <nav ref="{{ navRef }}" style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px clamp(16px,4vw,48px);transition:background .35s ease, box-shadow .35s ease, padding .35s ease;background:rgba(255,255,255,.0)">
+  <nav ref="{{ navRef }}" style="{{ navStyle }}">
     <a href="#top" style="display:flex;align-items:center;gap:12px;flex:none">
       <img src="https://drjonathangalindo.com/wp-content/uploads/2020/03/logo-dr-jonathan.svg" alt="Dr. Jonathan Galindo" style="height:48px;display:block">
     </a>
@@ -921,6 +920,10 @@ class Component extends DCLogic {
 
     return {
       navRef: (el) => { this._nav = el; },
+      navStyle: 'position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px clamp(16px,4vw,48px);transition:background .35s ease, box-shadow .35s ease, padding .35s ease;'
+        + (s.navSolid || s.mobileMenuOpen
+          ? 'background:#fff;box-shadow:0 8px 24px rgba(22,41,79,.08);'
+          : 'background:rgba(255,255,255,.0);'),
       mobileMenuOpen: s.mobileMenuOpen,
       mobileMenuIcon: s.mobileMenuOpen ? '✕' : '☰',
       toggleMobileMenu: this.toggleMobileMenu,
