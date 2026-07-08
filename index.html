@@ -71,6 +71,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   @media (max-width: 768px) {
     .hero-photo-frame { height: min(85vw, 420px) !important; width: min(68vw, 336px) !important; }
     .hero-photo-wrap { justify-content: center !important; }
+    .scroll-cue { display: none !important; }
   }
   @media (max-width: 600px) { .grid-4 { grid-template-columns: repeat(2,1fr) !important; } }
   @media (max-width: 420px) { .grid-4 { grid-template-columns: 1fr !important; } }
@@ -181,7 +182,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
     </div>
-    <a href="#doctor" data-reveal style="opacity:0;transition:opacity .8s ease .8s;position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:7px;color:#5B6B85;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase">
+    <a href="#doctor" data-reveal class="scroll-cue" style="opacity:0;transition:opacity .8s ease .8s;position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:7px;color:#5B6B85;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase">
       Descubre más
       <span style="width:26px;height:42px;border:2px solid #C3CFE2;border-radius:14px;position:relative;display:block"><span style="position:absolute;top:7px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:#1B449C;animation:scrollDot 1.8s ease-in-out infinite"></span></span>
     </a>
@@ -191,7 +192,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section id="doctor" data-screen-label="Doctor" style="padding:clamp(70px,9vw,130px) clamp(20px,5vw,64px);background:#FFFFFF">
     <div class="grid-2" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(40px,6vw,80px);align-items:center">
       <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .8s cubic-bezier(.2,.7,.2,1);position:relative;border-radius:24px;overflow:hidden;border:1px solid #E3E9F2;box-shadow:0 20px 50px rgba(22,41,79,.10);aspect-ratio:1/1;background:#F2F6FC">
-        <image-slot id="doctor-photo" shape="rect" fit="cover" src="imgs/doc.jpg" placeholder="Foto del doctor / consultorio"></image-slot>
+        <image-slot id="doctor-photo" shape="rect" fit="cover" src="imgs/hueso.avif" placeholder="Foto del doctor / consultorio"></image-slot>
       </div>
       <div>
         <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s cubic-bezier(.2,.7,.2,1);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#52AE32">Conoce al especialista</div>
