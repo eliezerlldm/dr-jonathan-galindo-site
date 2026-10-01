@@ -1,0 +1,58 @@
+# Configuración para el hosting de DreamHost (Apache).
+# Este archivo se sube con el nombre ".htaccess" (con punto al inicio).
+# En el repositorio se llama htaccess.txt para que no se oculte.
+
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# 1) Siempre https y sin "www": https://drjonathangalindo.com
+#    (la conversión de Google Ads en GTM exige esta dirección exacta)
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://drjonathangalindo.com%{REQUEST_URI} [L,R=301]
+
+# 2) Direcciones antiguas del WordPress que ya no existen
+RewriteRule ^category/ /blog/ [L,R=301]
+RewriteRule ^author/ /blog/ [L,R=301]
+RewriteRule ^(comments/)?feed/?$ /blog/ [L,R=301]
+RewriteRule ^wp-login\.php$ / [L,R=301]
+RewriteRule ^wp-admin/?$ / [L,R=301]
+RewriteRule ^xmlrpc\.php$ - [R=410,L]
+
+# 3) Catálogo de plantillas: misma dirección que tenía en el WordPress
+RewriteRule ^wp-content/uploads/2021/08/Dr\.-Jonathan-Galindo-1_compressed\.pdf$ /assets/Catalogo-Plantillas-Dr-Galindo.pdf [L,R=301]
+</IfModule>
+
+# Seguridad básica
+<IfModule mod_headers.c>
+Header set X-Content-Type-Options "nosniff"
+Header set Referrer-Policy "strict-origin-when-cross-origin"
+Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+# No mostrar archivos ocultos ni de configuración
+<FilesMatch "^\.|\.(md|sh)$">
+Require all denied
+</FilesMatch>
+
+# Compresión
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml application/xml
+</IfModule>
+
+# Caché del navegador
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/webp "access plus 6 months"
+ExpiresByType image/jpeg "access plus 6 months"
+ExpiresByType image/png "access plus 6 months"
+ExpiresByType image/avif "access plus 6 months"
+ExpiresByType image/x-icon "access plus 6 months"
+ExpiresByType application/pdf "access plus 1 month"
+ExpiresByType application/javascript "access plus 1 week"
+ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
