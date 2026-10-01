@@ -1,8 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ortopedista y Traumatólogo en Guadalajara | Dr. Jonathan Galindo</title>
+<meta name="description" content="Médico Ortopedista y Traumatólogo, Especialista en Cirugía del Deporte y Artroscopía en Guadalajara. Atención por cita y/o Urgencias.">
+<link rel="canonical" href="https://drjonathangalindo.com/">
+<meta name="theme-color" content="#1B449C">
+<meta property="og:locale" content="es_MX">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ortopedista y Traumatólogo en Guadalajara">
+<meta property="og:description" content="Médico Ortopedista y Traumatólogo, Especialista en Cirugía del Deporte y Artroscopía. Atención por cita y/o Urgencias.">
+<meta property="og:url" content="https://drjonathangalindo.com/">
+<meta property="og:site_name" content="Dr. Jonathan Galindo Contreras">
+<meta property="og:image" content="https://drjonathangalindo.com/imgs/doc.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Physician","name":"Dr. Jonathan Galindo Contreras","url":"https://drjonathangalindo.com/","image":"https://drjonathangalindo.com/imgs/doc.jpg","telephone":"+523322740493","email":"medico@drjonathangalindo.com","medicalSpecialty":["Orthopedic","SportsMedicine"],"availableService":["Artroscopía","Cirugía del deporte","Reemplazo articular","Fijación de fracturas"],"address":{"@type":"PostalAddress","streetAddress":"Av. del Parque 37, San Andrés","postalCode":"44810","addressLocality":"Guadalajara","addressRegion":"Jalisco","addressCountry":"MX"}}
+</script>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -155,7 +170,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .8s cubic-bezier(.2,.7,.2,1) .38s;display:flex;align-items:center;flex-wrap:wrap;gap:8px 18px;margin-top:26px;font-size:13.5px;color:#5B6B85;font-weight:600">
           <span style="display:inline-flex;align-items:center;gap:7px"><span style="color:#52AE32;font-size:15px">✓</span> Convenio con todas las aseguradoras</span>
-          <span style="display:inline-flex;align-items:center;gap:7px"><span style="color:#52AE32;font-size:15px">✓</span> 2 consultorios en Guadalajara</span>
+          <span style="display:inline-flex;align-items:center;gap:7px"><span style="color:#52AE32;font-size:15px">✓</span> Consultorio en Guadalajara</span>
         </div>
       </div>
 
@@ -451,6 +466,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div style="display:grid;gap:14px">
                 <input value="{{ fName }}" onInput="{{ onName }}" placeholder="Tu nombre completo" style="width:100%;padding:15px 16px;background:#F6F9FD;border:1px solid #D8E0EE;border-radius:12px;color:#16294F;font:inherit;font-size:15px;outline:none">
                 <input value="{{ fPhone }}" onInput="{{ onPhone }}" inputmode="tel" placeholder="Tu teléfono (WhatsApp)" style="width:100%;padding:15px 16px;background:#F6F9FD;border:1px solid #D8E0EE;border-radius:12px;color:#16294F;font:inherit;font-size:15px;outline:none">
+                <input value="{{ fEmail }}" onInput="{{ onEmail }}" type="email" inputmode="email" placeholder="Tu correo (opcional)" style="width:100%;padding:15px 16px;background:#F6F9FD;border:1px solid #D8E0EE;border-radius:12px;color:#16294F;font:inherit;font-size:15px;outline:none">
                 <textarea value="{{ fNotes }}" onInput="{{ onNotes }}" placeholder="Cuéntanos brevemente qué te pasa (opcional)" rows="3" style="width:100%;padding:15px 16px;background:#F6F9FD;border:1px solid #D8E0EE;border-radius:12px;color:#16294F;font:inherit;font-size:15px;outline:none;resize:vertical"></textarea>
               </div>
               <div style="margin-top:22px;padding:18px 20px;background:#F6F9FD;border:1px solid #E3E9F2;border-radius:14px">
@@ -481,6 +497,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <h3 style="font-family:'PT Sans';font-weight:700;font-size:26px;margin:22px 0 8px;color:#16294F">¡Solicitud recibida!</h3>
               <p style="font-size:16px;color:#4A5B7C;max-width:440px;margin:0 auto 8px;line-height:1.6">Gracias {{ fName }}. Tu solicitud para el <strong style="color:#16294F">{{ sumDate }} a las {{ sumTime }}</strong> quedó registrada.</p>
               <p style="font-size:15px;color:#5B6B85;max-width:440px;margin:0 auto 26px">Presiona el botón para confirmarla ahora mismo por WhatsApp.</p>
+              <sc-if value="{{ sendFailed }}" hint-placeholder-val="{{ false }}">
+                <p style="font-size:15px;color:#9A3412;background:#FFF4E5;border:1px solid #F5C98B;border-radius:12px;padding:12px 16px;max-width:440px;margin:0 auto 22px;line-height:1.5">No pudimos enviar tu solicitud automáticamente. Por favor confírmala ahora por WhatsApp para que el consultorio la reciba.</p>
+              </sc-if>
               <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
                 <a href="{{ waHref }}" target="_blank" style="display:inline-flex;align-items:center;gap:9px;background:#25D366;color:#fff;padding:15px 26px;border-radius:13px;font-weight:700;font-size:15.5px">Abrir Whatsapp para confirmar</a>
                 <button onClick="{{ reset }}" style="background:#fff;border:1px solid #D8E0EE;color:#33456B;padding:15px 24px;border-radius:13px;font-weight:600;font-size:15px;cursor:pointer;font-family:inherit">Agendar otra</button>
@@ -539,30 +558,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div style="max-width:1200px;margin:0 auto">
       <div style="text-align:center;max-width:600px;margin:0 auto 48px">
         <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#52AE32">Dónde encontrarnos</div>
-        <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .06s;font-family:'PT Sans';font-weight:700;font-size:clamp(30px,3.6vw,46px);letter-spacing:-.8px;margin:14px 0 0;color:#1B449C">Consultorios en Guadalajara</h2>
+        <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .06s;font-family:'PT Sans';font-weight:700;font-size:clamp(30px,3.6vw,46px);letter-spacing:-.8px;margin:14px 0 0;color:#1B449C">Consultorio en Guadalajara</h2>
       </div>
-      <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
-        <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .8s ease;background:#fff;border:1px solid #E3E9F2;border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(22,41,79,.07)">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3732.4637376807877!2d-103.3705937!3d20.691385199999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428af5bf64f4bdd%3A0xb254acc91c249c41!2sDr.%20Jonathan%20Galindo%20-%20Traumat%C3%B3logo%20y%20Ortopedista!5e0!3m2!1ses-419!2smx!4v1677953522106!5m2!1ses-419!2smx" style="width:100%;height:230px;border:0" loading="lazy"></iframe>
-          <div style="padding:24px">
-            <h3 style="font-family:'PT Sans';font-weight:700;font-size:19px;margin:0 0 8px;color:#16294F">Hospital México Americano</h3>
-            <p style="font-size:14.5px;color:#5B6B85;margin:0 0 14px;line-height:1.5">C. Colomos 2113, Ayuntamiento, 44620 Guadalajara, Jal.</p>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;font-size:13px">
-              <span style="padding:6px 12px;background:rgba(27,68,156,.08);color:#1B449C;border-radius:100px;font-weight:700">Lun–Vie · previa cita</span>
-              <span style="padding:6px 12px;background:rgba(82,174,50,.10);color:#3D8A24;border-radius:100px;font-weight:700">Urgencias 24h</span>
-            </div>
+      <div data-reveal class="grid-2" style="opacity:0;transform:translateY(24px);transition:all .8s ease;display:grid;grid-template-columns:1.3fr 1fr;background:#fff;border:1px solid #E3E9F2;border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(22,41,79,.07)">
+        <iframe src="https://www.google.com/maps?q=Hospital+del+Parque,+Av.+del+Parque+37,+San+Andr%C3%A9s,+44810+Guadalajara,+Jal.&output=embed" title="Mapa del Hospital del Parque" style="width:100%;height:100%;min-height:320px;border:0" loading="lazy"></iframe>
+        <div style="padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;justify-content:center">
+          <h3 style="font-family:'PT Sans';font-weight:700;font-size:22px;margin:0 0 8px;color:#16294F">Hospital del Parque</h3>
+          <p style="font-size:15.5px;color:#5B6B85;margin:0 0 18px;line-height:1.55">Av. del Parque 37, San Andrés, 44810 Guadalajara, Jal.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;font-size:13px;margin-bottom:22px">
+            <span style="padding:6px 12px;background:rgba(27,68,156,.08);color:#1B449C;border-radius:100px;font-weight:700">Lun–Vie · previa cita</span>
+            <span style="padding:6px 12px;background:rgba(82,174,50,.10);color:#3D8A24;border-radius:100px;font-weight:700">Urgencias 24h</span>
           </div>
-        </div>
-        <div data-reveal style="opacity:0;transform:translateY(24px);transition:all .8s ease .1s;background:#fff;border:1px solid #E3E9F2;border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(22,41,79,.07)">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3732.8861935101077!2d-103.28087484944868!3d20.67420858612381!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428b19862b58d55%3A0xfe3f1c2bca4ca348!2sDr.%20Jonathan%20Galindo%20-%20Traumat%C3%B3logo%20y%20Ortopedista!5e0!3m2!1ses-419!2smx!4v1612393336659!5m2!1ses-419!2smx" style="width:100%;height:230px;border:0" loading="lazy"></iframe>
-          <div style="padding:24px">
-            <h3 style="font-family:'PT Sans';font-weight:700;font-size:19px;margin:0 0 8px;color:#16294F">Hospital Siloé</h3>
-            <p style="font-size:14.5px;color:#5B6B85;margin:0 0 14px;line-height:1.5">Ramón López Velarde 3843, CP 44770, Guadalajara, Jal.</p>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;font-size:13px">
-              <span style="padding:6px 12px;background:rgba(27,68,156,.08);color:#1B449C;border-radius:100px;font-weight:700">Lun–Vie · previa cita</span>
-              <span style="padding:6px 12px;background:rgba(82,174,50,.10);color:#3D8A24;border-radius:100px;font-weight:700">Urgencias 24h</span>
-            </div>
-          </div>
+          <a href="https://maps.app.goo.gl/gJLvjGnjUR1y3k386" target="_blank" rel="noopener" style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:#1B449C;color:#fff;padding:13px 22px;border-radius:12px;font-weight:700;font-size:15px">Cómo llegar →</a>
         </div>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:40px">
@@ -667,6 +674,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <button onClick="{{ q.onSelect }}" style="padding:9px 13px;background:#F2F6FC;border:1px solid rgba(27,68,156,.25);border-radius:100px;color:#1B449C;font:inherit;font-size:13px;font-weight:600;cursor:pointer" style-hover="background:rgba(27,68,156,.08)">{{ q.label }}</button>
             </sc-for>
           </div>
+          <a href="https://api.whatsapp.com/send?phone=5213322740493&text=%C2%A1Hola!%20Quisiera%20solicitar%20una%20cita." target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:9px;margin-top:14px;background:#25D366;color:#fff;padding:13px 18px;border-radius:12px;font-weight:700;font-size:14.5px">Escribir por WhatsApp</a>
         </div>
       </div>
     </sc-if>
@@ -681,7 +689,7 @@ class Component extends DCLogic {
     navSolid: false,
     mobileMenuOpen: false,
     step: 1,
-    loc: null,
+    loc: 'parque',
     motivo: null,
     zones: [],
     date: null,
@@ -689,10 +697,12 @@ class Component extends DCLogic {
     name: '',
     phone: '',
     notes: '',
+    email: '',
+    sendFailed: false,
     error: '',
     booked: false,
     chatOpen: false,
-    chatMsgs: [{ from: 'bot', text: '¡Hola! Soy el asistente del Dr. Jona Galindo 👋 ¿En qué puedo ayudarte hoy?' }],
+    chatMsgs: [{ from: 'bot', text: '¡Hola! Soy el asistente del Dr. Jonathan Galindo 👋 ¿Tienes alguna duda? ¿En qué puedo ayudarte hoy?' }],
     modal: null,
     consIndex: 0,
     heroWordIdx: 0,
@@ -786,8 +796,7 @@ class Component extends DCLogic {
   ];
 
   LOCATIONS = [
-    { id: 'mexamer', name: 'Hospital México Americano', addr: 'C. Colomos 2113, Ayuntamiento' },
-    { id: 'siloe', name: 'Hospital Siloé', addr: 'Ramón López Velarde 3843' },
+    { id: 'parque', name: 'Hospital del Parque', addr: 'Av. del Parque 37, San Andrés' },
   ];
   MOTIVOS = ['Lesión deportiva', 'Dolor articular', 'Fractura / urgencia', 'Revisión y seguimiento', 'Plantillas personalizadas', 'Segunda opinión'];
   ZONES = ['Rodilla', 'Hombro', 'Cadera', 'Columna', 'Tobillo / pie', 'Codo / muñeca', 'Mano', 'Otra'];
@@ -891,6 +900,52 @@ class Component extends DCLogic {
     return out;
   }
 
+  // Avisos de cita al correo del doctor. Principal: EmailJS (correo en español).
+  // Respaldo: Web3Forms, solo si EmailJS falla o aún no tiene Public Key.
+  EMAILJS_SERVICE = 'service_82g5lqt';
+  EMAILJS_TEMPLATE = 'template_8e7d33r';
+  EMAILJS_PUBLIC_KEY = 'Xc_1qaMrR62Z4V_op';
+  WEB3FORMS_KEY = '2bfeeec0-e751-4827-8da4-bd508636fa42';
+
+  async sendLead() {
+    const s = this.state;
+    const loc = this.LOCATIONS.find((l) => l.id === s.loc);
+    const day = this.buildDays().find((d) => d.iso === s.date);
+    const f = {
+      nombre: s.name.trim(),
+      telefono: s.phone.trim(),
+      email: s.email.trim(),
+      consultorio: loc ? loc.name : '',
+      motivo: s.motivo || '',
+      zona: s.zones.join(', ') || 'No indicada',
+      fecha: day ? day.full + ' (' + s.date + ')' : '',
+      hora: s.time || '',
+      notas: s.notes.trim() || 'Sin comentarios',
+    };
+    const post = (url, body) => fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) });
+    let ok = false;
+    if (this.EMAILJS_PUBLIC_KEY) {
+      try {
+        const r = await post('https://api.emailjs.com/api/v1.0/email/send', {
+          service_id: this.EMAILJS_SERVICE, template_id: this.EMAILJS_TEMPLATE, user_id: this.EMAILJS_PUBLIC_KEY, template_params: f,
+        });
+        ok = r.ok;
+      } catch (e) { ok = false; }
+    }
+    if (!ok && this.WEB3FORMS_KEY) {
+      try {
+        const payload = {
+          access_key: this.WEB3FORMS_KEY, subject: 'Cita Dr. Jonathan Galindo — ' + f.nombre, from_name: 'Sitio web Dr. Galindo',
+          Nombre: f.nombre, Telefono: f.telefono, Consultorio: f.consultorio, Motivo: f.motivo, Zona: f.zona,
+          Fecha: f.fecha, Hora: f.hora, Notas: f.notas, ...(f.email ? { email: f.email } : {}), botcheck: '',
+        };
+        const r = await post('https://api.web3forms.com/submit', payload);
+        ok = r.ok;
+      } catch (e) { ok = false; }
+    }
+    if (!ok) this.setState({ sendFailed: true });
+  }
+
   fireBookingConversion() {
     const iframe = document.createElement('iframe');
     iframe.src = '/gracias/';
@@ -906,7 +961,8 @@ class Component extends DCLogic {
     if (s.step === 3 && (!s.date || !s.time)) { this.setState({ error: 'Elige fecha y horario.' }); return; }
     if (s.step === 4) {
       if (!s.name.trim() || s.phone.replace(/\D/g, '').length < 8) { this.setState({ error: 'Escribe tu nombre y un teléfono válido.' }); return; }
-      this.setState({ booked: true, error: '' });
+      this.setState({ booked: true, error: '', sendFailed: false });
+      this.sendLead();
       this.fireBookingConversion();
       return;
     }
@@ -915,7 +971,7 @@ class Component extends DCLogic {
   back = () => {
     if (this.state.step > 1) this.setState({ step: this.state.step - 1, error: '' });
   };
-  reset = () => this.setState({ step: 1, loc: null, motivo: null, zones: [], date: null, time: null, name: '', phone: '', notes: '', booked: false, error: '' });
+  reset = () => this.setState({ step: 1, loc: 'parque', motivo: null, zones: [], date: null, time: null, name: '', phone: '', notes: '', email: '', sendFailed: false, booked: false, error: '' });
 
   toggleZone(z) {
     const has = this.state.zones.includes(z);
@@ -939,7 +995,7 @@ class Component extends DCLogic {
       '¿Atienden urgencias?': 'Sí, atendemos urgencias las 24 horas. Llama al (33) 2274 0493 y te orientamos de inmediato.',
       'Plantillas personalizadas': 'Hacemos plantillas a la medida para deportistas, postura y más. ¿Te comparto info por WhatsApp?',
       '¿Aceptan mi seguro?': 'Trabajamos con todas las aseguradoras y hacemos convenio aunque no esté en el listado. ¿Cuál tienes?',
-      'Ubicación de consultorios': 'Estamos en Hospital México Americano (Col. Colomos) y Hospital Siloé, ambos en Guadalajara.',
+      'Ubicación del consultorio': 'Estamos en el Hospital del Parque, Av. del Parque 37, San Andrés, Guadalajara.',
     };
     const bot = replies[q] || 'Con gusto te ayudo. Escríbenos por WhatsApp al (33) 2274 0493 para más detalles.';
     this.setState({ chatMsgs: [...this.state.chatMsgs, { from: 'me', text: q }, { from: 'bot', text: bot }] });
@@ -996,9 +1052,9 @@ class Component extends DCLogic {
       closeService: this.closeService,
       stop: (e) => { e.stopPropagation(); },
       reviews: [
-        { text: 'Excelente doctor, muy buena persona y demasiado acertado en sus diagnósticos. Me fracturé la rodilla y hoy está como si no hubiera pasado nada.', name: 'Juan Ramón Gálvez', when: 'Hace un año', initial: 'J' },
-        { text: 'Es un excelente doctor, gracias a él mi mamá salió adelante. Se preocupa mucho por sus pacientes. Lo recomiendo al 100%.', name: 'Gabriela Plascencia', when: 'Hace 5 años', initial: 'G' },
-        { text: 'Profesional y con calidez humana. Tuve una ruptura de tendón y me sacó adelante. Lo recomiendo ampliamente.', name: 'Javier Amigo', when: 'Hace 3 años', initial: 'J' },
+        { text: 'Es un excelente doctor, muy buena persona y demasiado acertado en sus diagnósticos, hace 9 meses me fracture la rodilla y al día de hoy mi rodilla está como si no hubiera pasado nada mas doctores como el que se preocupen por sus pacientes', name: 'Juan Ramon Galvez', when: 'Hace 2 años', initial: 'J' },
+        { text: 'Es un excelente doctor gracias a el mi mamá salió adelante. También una excelente persona se preocupa mucho por sus pacientes que todo vaya bien. La verdad lo recomiendo al 100% por que doctores como el son muy pocos.', name: 'Gabriela Alejandra Plascencia Tamayo', when: 'Hace 6 años', initial: 'G' },
+        { text: 'Un excelente doctor, profesional y con calidez humana. Yo tuve un problema de ruptura de tendon y me saco adelante, también a mi esposa la entendió con un profesionalismo. Lo recomiendo ampliamente. Gracias Doctor Jonathan Galindo.', name: 'Javier Amigo', when: 'Hace 4 años', initial: 'J' },
       ],
       insurers: [
         { label: 'GNP', ic: 'G', badgeC: '#EE6C1A', wm: "font-family:'PT Sans';font-weight:800;font-size:22px;color:#EE6C1A;letter-spacing:1.5px" },
@@ -1019,6 +1075,7 @@ class Component extends DCLogic {
       isStep2: !s.booked && s.step === 2,
       isStep3: !s.booked && s.step === 3,
       isStep4: !s.booked && s.step === 4,
+      sendFailed: s.sendFailed,
       hasError: !!s.error,
       errorMsg: s.error,
 
@@ -1028,10 +1085,11 @@ class Component extends DCLogic {
       days: days.map((d) => ({ ...d, style: this.dayStyle(s.date === d.iso), onSelect: () => this.setState({ date: d.iso, error: '' }) })),
       times: this.TIMES.map((t) => ({ label: t, style: this.chipStyle(s.time === t, false), onSelect: () => this.setState({ time: t, error: '' }) })),
 
-      fName: s.name, fPhone: s.phone, fNotes: s.notes,
+      fName: s.name, fPhone: s.phone, fNotes: s.notes, fEmail: s.email,
       onName: (e) => this.setState({ name: e.target.value }),
       onPhone: (e) => this.setState({ phone: e.target.value }),
       onNotes: (e) => this.setState({ notes: e.target.value }),
+      onEmail: (e) => this.setState({ email: e.target.value }),
 
       sumLoc: locName,
       sumMotivo: (s.motivo || '—') + zonesTxt,
@@ -1052,7 +1110,7 @@ class Component extends DCLogic {
         wrap: 'display:flex;justify-content:' + (m.from === 'me' ? 'flex-end' : 'flex-start'),
         bubble: 'max-width:82%;padding:11px 14px;border-radius:15px;font-size:14px;line-height:1.5;' + (m.from === 'me' ? 'background:#1B449C;color:#fff;border-bottom-right-radius:5px;' : 'background:#fff;color:#33456B;border:1px solid #E3E9F2;border-bottom-left-radius:5px;'),
       })),
-      quickReplies: ['Agendar una cita', '¿Atienden urgencias?', 'Plantillas personalizadas', '¿Aceptan mi seguro?', 'Ubicación de consultorios'].map((q) => ({ label: q, onSelect: () => this.sendQuick(q) })),
+      quickReplies: ['Agendar una cita', '¿Atienden urgencias?', 'Plantillas personalizadas', '¿Aceptan mi seguro?', 'Ubicación del consultorio'].map((q) => ({ label: q, onSelect: () => this.sendQuick(q) })),
     };
   }
 }
