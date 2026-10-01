@@ -653,9 +653,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#52AE32">Reduce costos</div>
       <h2 data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .06s;font-family:'PT Sans';font-weight:700;font-size:clamp(26px,3vw,38px);letter-spacing:-.5px;margin:12px 0 8px;color:#1B449C">Trabajamos con tu aseguradora</h2>
       <p data-reveal style="opacity:0;transform:translateY(20px);transition:all .8s ease .12s;font-size:16px;color:#5B6B85;max-width:520px;margin:0 auto 36px">Si no ves la tuya en el listado, no te preocupes: hacemos convenio con todas las aseguradoras.</p>
-      <div class="grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
-        <sc-for list="{{ insurers }}" as="ins" hint-placeholder-count="8">
-          <div data-reveal style="opacity:0;transform:translateY(16px);transition:all .6s ease;height:72px;display:flex;align-items:center;justify-content:center;gap:11px;background:#fff;border:1px solid #E3E9F2;border-radius:12px;padding:8px 12px;box-shadow:0 4px 14px rgba(22,41,79,.05)"><span style="{{ ins.badge }}">{{ ins.ic }}</span><span style="{{ ins.wm }}">{{ ins.label }}</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px">
+        <sc-for list="{{ insurers }}" as="ins" hint-placeholder-count="12">
+          <div data-reveal style="opacity:0;transform:translateY(16px);transition:all .6s ease;height:88px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #E3E9F2;border-radius:12px;padding:14px 18px;box-shadow:0 4px 14px rgba(22,41,79,.05)"><img src="{{ ins.src }}" alt="{{ ins.label }}" loading="lazy" style="max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;margin:0;display:block"></div>
         </sc-for>
       </div>
     </div>
@@ -1236,16 +1236,19 @@ class Component extends DCLogic {
         { text: 'Un excelente doctor, profesional y con calidez humana. Yo tuve un problema de ruptura de tendon y me saco adelante, también a mi esposa la entendió con un profesionalismo. Lo recomiendo ampliamente. Gracias Doctor Jonathan Galindo.', name: 'Javier Amigo', when: 'Hace 4 años', initial: 'J' },
       ],
       insurers: [
-        { label: 'GNP', ic: 'G', badgeC: '#EE6C1A', wm: "font-family:'PT Sans';font-weight:800;font-size:22px;color:#EE6C1A;letter-spacing:1.5px" },
-        { label: 'AXA', ic: 'A', badgeC: '#00008F', wm: "font-family:'PT Sans';font-weight:800;font-size:22px;color:#00008F;letter-spacing:2.5px" },
-        { label: 'MetLife', ic: 'M', badgeC: '#0090DA', wm: "font-family:'PT Sans';font-weight:700;font-size:20px;color:#0090DA;letter-spacing:.2px" },
-        { label: 'S. Monterrey', ic: 'SM', badgeC: '#003DA5', wm: "font-family:'PT Sans';font-weight:700;font-size:16px;color:#003DA5;letter-spacing:.2px" },
-        { label: 'Atlas', ic: 'A', badgeC: '#E4002B', wm: "font-family:'PT Sans';font-weight:800;font-size:20px;color:#E4002B;letter-spacing:.5px" },
-        { label: 'MAPFRE', ic: 'M', badgeC: '#D2112B', wm: "font-family:'PT Sans';font-weight:800;font-size:19px;color:#D2112B;letter-spacing:1.5px" },
-        { label: 'Plan Seguro', ic: 'PS', badgeC: '#0B7A3B', wm: "font-family:'PT Sans';font-weight:700;font-size:16px;color:#0B7A3B;letter-spacing:.2px" },
-        { label: 'bupa', ic: 'b', badgeC: '#0079C8', wm: "font-family:'PT Sans';font-weight:800;font-size:22px;color:#0079C8;letter-spacing:.5px" },
-      ].map((x) => ({ ...x, badge: 'display:inline-flex;align-items:center;justify-content:center;flex:none;width:40px;height:40px;border-radius:11px;background:' + x.badgeC + ';color:#fff;font-family:\'PT Sans\';font-weight:800;font-size:15px;letter-spacing:.3px' })),
-
+        { label: 'Allianz', src: 'imgs/aseguradoras/logo-01.webp' },
+        { label: 'AXA', src: 'imgs/aseguradoras/logo-02.webp' },
+        { label: 'GNP Seguros', src: 'imgs/aseguradoras/logo-03.webp' },
+        { label: 'MAPFRE', src: 'imgs/aseguradoras/logo-04.webp' },
+        { label: 'MetLife', src: 'imgs/aseguradoras/logo-05.webp' },
+        { label: 'Plan Seguro', src: 'imgs/aseguradoras/logo-06.webp' },
+        { label: 'Seguros Atlas', src: 'imgs/aseguradoras/logo-07.webp' },
+        { label: 'Seguros Banorte', src: 'imgs/aseguradoras/logo-08.webp' },
+        { label: 'Bupa', src: 'imgs/aseguradoras/logo-09.webp' },
+        { label: 'Seguros Monterrey New York Life', src: 'imgs/aseguradoras/logo-10.webp' },
+        { label: 'Seguros Multiva', src: 'imgs/aseguradoras/logo-11.webp' },
+        { label: 'Zurich', src: 'imgs/aseguradoras/logo-12.webp' },
+      ],
       pStep: s.pStep,
       pIsZone: s.pStep === 0,
       pIsSingle: [1, 2, 3, 5].includes(s.pStep),
